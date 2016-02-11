@@ -6,4 +6,9 @@ class GameObject  {
 		this.y = y;
 		this.speed = speed;
 	}
+
+	void update() {
+		move();
+		render();
+	} // end update()
 }

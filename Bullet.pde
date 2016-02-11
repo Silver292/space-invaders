@@ -8,12 +8,6 @@ class Bullet extends GameObject{
     super(x, y, speed);
   }
 
-  // update
-  void update() {
-    render();
-    move();
-  }
-
   // bullet movement
   void move() {
     y -= speed;

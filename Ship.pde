@@ -11,11 +11,6 @@ class Ship extends GameObject {
 		this.colour = colour;
 	} // end constructor
 
-	void update() {
-		move();
-		render();
-	} // end update()
-
 	// checks the next X location and returns true
 	// if within bounds else returns false
 	boolean inXBounds(int nextX) {
