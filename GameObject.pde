@@ -11,4 +11,8 @@ class GameObject  {
 		move();
 		render();
 	} // end update()
+
+	void move(){};
+
+	void render(){};
 }
