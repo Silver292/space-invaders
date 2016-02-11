@@ -10,7 +10,7 @@ class Invader extends Ship {
 	} // end constructor
 
 	void move() {
-                // patterened movement
+        // patterened movement
 		if (moveCounter > 15) {
 			moveY();
 		} else {
@@ -18,8 +18,8 @@ class Invader extends Ship {
 		}
 
 		moveCounter++;
-                
-                // change direction after amount
+
+        // change direction after amount
 		if (moveCounter >=30) {
 			moveCounter = 0;
 			xDirection = -xDirection;
@@ -44,16 +44,4 @@ class Invader extends Ship {
 		y = nextY;
 	}
 
-/*	Old bouncing move
-	void move() {
-		int nextX = x + (xDirection * speed);
-
-		// Bounce on boundaries
-		if (!inXBounds(nextX)) {
-
-			xDirection = -xDirection;
-		}
-
-		x = nextX;
-	} // end move*/
 }
