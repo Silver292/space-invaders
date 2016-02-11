@@ -1,11 +1,16 @@
+// Game constants
+final int TITLE_SCREEN = 0;
+final int GAME_PLAYING = 1;
+final int GAME_OVER    = 2;
+
+// Game Vars
 Defender player;
 Bullet bullet;
 Invader enemy;
 Invader[][] enemyArray;
 int enemies = 10; // enemy amount
+int gameState = TITLE_SCREEN;
 
-boolean gameOver  = false;
-boolean gameStart = false;
 
 void setup() {
 	size(565, 600);
@@ -17,23 +22,33 @@ void setup() {
 void draw() {
 
 	// Show title screen until game is started
-	while(!gameStart){
+	switch (gameState) {
 
-	}
+		case TITLE_SCREEN :
+			gameState = titleScreen();
+		break;
 
-	background(255);
-	player.update();
+		case GAME_PLAYING :
+			// TODO: take this to its own place
+			background(255);
+			player.update();
 
-	// loop through array
-	for (int row = 0; row < enemyArray.length; ++row)
-	{
-		for(int column = 0; column < enemyArray[0].length; column++)
-		{
-			if(enemyArray[row][column] != null){
-				enemyArray[row][column].update();
+			// loop through array
+			for (int row = 0; row < enemyArray.length; ++row)
+			{
+				for(int column = 0; column < enemyArray[0].length; column++)
+				{
+					if(enemyArray[row][column] != null){
+						enemyArray[row][column].update();
+					}
+				}
+
 			}
-		}
+		break;
 
+		case GAME_OVER :
+		// TODO: Handle this, ensure that there is a win and lose screen
+		break;
 	}
 
 }
@@ -86,3 +101,30 @@ void keyPressed() {
 	}
 
 }
+
+int titleScreen(){
+	background(0);
+	textAlign(CENTER);
+	textSize(32);
+	fill(255);
+	text("Space Invaders", width/2, 100);
+
+	// button
+	// TODO: take this button elsewhere, button class?
+	int rectWidth    = 150;
+	int rectHeight   = 80;
+	int rectRounding = 7;
+	int rectY        = height - rectHeight *2;
+	int rectX        = width/2;
+
+	rectMode(CENTER);
+	fill(255);
+	rect(rectX, rectY, rectWidth, rectHeight, rectRounding);
+
+	textAlign(CENTER, CENTER);
+	textSize(22);
+	fill(0);
+	text("START", rectX, rectY);
+
+	return 0;
+};
