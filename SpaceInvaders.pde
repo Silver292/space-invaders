@@ -8,6 +8,7 @@ Defender player;
 Bullet bullet;
 Invader enemy;
 Invader[][] enemyArray;
+Button startButton;
 int enemies = 10; // enemy amount
 int gameState = TITLE_SCREEN;
 
@@ -17,6 +18,10 @@ void setup() {
 	enemyArray = new Invader[2][enemies];
 	initEnemies();
 	player = new Defender(250, 530, 5, #CBCBCB, enemyArray);
+	// create start button#
+	startButton = new Button("START", width/2, height - 160,
+		150, 80, color(0,153,51), 7);
+
 }
 
 void draw() {
@@ -25,7 +30,7 @@ void draw() {
 	switch (gameState) {
 
 		case TITLE_SCREEN :
-			gameState = titleScreen();
+			titleScreen();
 		break;
 
 		case GAME_PLAYING :
@@ -102,29 +107,20 @@ void keyPressed() {
 
 }
 
-int titleScreen(){
+void titleScreen(){
 	background(0);
 	textAlign(CENTER);
 	textSize(32);
 	fill(255);
 	text("Space Invaders", width/2, 100);
 
-	// button
-	// TODO: take this button elsewhere, button class?
-	int rectWidth    = 150;
-	int rectHeight   = 80;
-	int rectRounding = 7;
-	int rectY        = height - rectHeight *2;
-	int rectX        = width/2;
-
-	rectMode(CENTER);
-	fill(255);
-	rect(rectX, rectY, rectWidth, rectHeight, rectRounding);
-
-	textAlign(CENTER, CENTER);
-	textSize(22);
-	fill(0);
-	text("START", rectX, rectY);
-
-	return 0;
+	// draw button
+	startButton.render();
 };
+
+// Get mouse clicks for button presses
+void mousePressed(){
+	if(startButton.overButton(mouseX, mouseY)){
+		gameState = 1;
+	}
+}
