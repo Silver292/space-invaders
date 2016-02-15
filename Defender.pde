@@ -55,7 +55,7 @@ class Defender extends Ship {
 
 	void shoot()
 	{
-		Bullet bullet = new Bullet(x + 25, y, 5);
+		Bullet bullet = new Bullet(x + shipWidth/2, y, 5);
 		bullets.add(bullet);
 	}
 }
