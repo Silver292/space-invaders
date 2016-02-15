@@ -8,20 +8,25 @@ Defender player;
 Bullet bullet;
 Invader enemy;
 Invader[][] enemyArray;
-Button startButton;
+Button startButton, endButton;
 public static int enemiesPerRow = 10; // enemy amount per row
 public static int enemyRows = 2;
 public static int enemies = enemyRows * enemiesPerRow; // total enemies
-int gameState = TITLE_SCREEN;
+int gameState;
 
 
 void setup() {
 	size(565, 600);
+
+	gameState = TITLE_SCREEN;
+
 	enemyArray = new Invader[enemyRows][enemiesPerRow];
 	initEnemies();
 	player = new Defender(250, 530, 5, #CBCBCB, enemyArray);
-	// create start button#
+	// create buttons
 	startButton = new Button("START", width/2, height - 160,
+		150, 80, color(0,153,51), 7);
+	endButton = new Button("Return to title", width/2, height - 160,
 		150, 80, color(0,153,51), 7);
 
 }
@@ -60,8 +65,7 @@ void draw() {
 
 		case GAME_OVER :
 		// TODO: Handle this, ensure that there is a win and lose screen
-		println("Game over");
-		exit();
+			endScreen();
 		break;
 	}
 
@@ -116,6 +120,7 @@ void keyPressed() {
 
 }
 
+// Draws titles screen
 void titleScreen(){
 	background(0);
 	textAlign(CENTER);
@@ -125,11 +130,33 @@ void titleScreen(){
 
 	// draw button
 	startButton.render();
-};
+}
+
+// Draws end game screen
+void endScreen(){
+	String gameMessage;
+
+	if (enemies <= 0){
+		gameMessage = "Congratulations!";
+	} else {
+		gameMessage = "Game Over";
+	}
+
+	background(0);
+	textAlign(CENTER);
+	textSize(32);
+	fill(255);
+	text(gameMessage, width/2, 100);
+
+	// draw button
+	endButton.render();
+}
 
 // Get mouse clicks for button presses
 void mousePressed(){
 	if(startButton.overButton(mouseX, mouseY)){
-		gameState = 1;
+		gameState = GAME_PLAYING;
+	} else if(endButton.overButton(mouseX, mouseY)){
+		gameState = TITLE_SCREEN; //TODO: FIX THIS!
 	}
 }
