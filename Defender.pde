@@ -38,6 +38,7 @@ class Defender extends Ship {
 						if(bullet.hasCollided(enemyArray[row][column])){
 							iterator.remove(); // TODO: find a way to remove bullets from arraylist
 							enemyArray[row][column] = null;
+							SpaceInvaders.enemies--;
 						}
 					} // end inner inner for
 				} // end inner for
