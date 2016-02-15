@@ -9,13 +9,15 @@ Bullet bullet;
 Invader enemy;
 Invader[][] enemyArray;
 Button startButton;
-int enemies = 10; // enemy amount
+public static int enemiesPerRow = 10; // enemy amount per row
+public static int enemyRows = 2;
+public static int enemies = enemyRows * enemiesPerRow; // total enemies
 int gameState = TITLE_SCREEN;
 
 
 void setup() {
 	size(565, 600);
-	enemyArray = new Invader[2][enemies];
+	enemyArray = new Invader[enemyRows][enemiesPerRow];
 	initEnemies();
 	player = new Defender(250, 530, 5, #CBCBCB, enemyArray);
 	// create start button#
@@ -49,10 +51,17 @@ void draw() {
 				}
 
 			}
+
+			// check for game end conditions
+			if (enemies <= 0){
+				gameState = GAME_OVER;
+			}
 		break;
 
 		case GAME_OVER :
 		// TODO: Handle this, ensure that there is a win and lose screen
+		println("Game over");
+		exit();
 		break;
 	}
 
