@@ -15,7 +15,7 @@ class Ship extends GameObject {
 	// if within bounds else returns false
 	boolean inXBounds(int nextX) {
 		// TODO: Will need updating with image sizes
-		return (nextX > 0 && nextX + 50 < width);
+		return (nextX > 0 && nextX + shipWidth < width);
 	} // end inXBounds()
 
 	void move() {
@@ -31,6 +31,7 @@ class Ship extends GameObject {
 	void render() {
 		stroke(0);
 		fill(colour);
+		rectMode(CORNER);
 		rect(x, y, shipWidth, shipHeight);
 	} // end render
 }
