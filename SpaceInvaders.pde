@@ -45,7 +45,7 @@ void draw() {
 			// check if any enemies have hit the boundary
 			for (int row = 0; row < enemyArray.length; ++row)
 			{
-				for(int column = 0; column < enemyArray[0].length; column++)
+				for(int column = 0; column < enemyArray[row].length; column++)
 				{
 					// if enemy exits and will hit the edge next
 					if(enemyArray[row][column] != null && enemyArray[row][column].hitsEdge()){
@@ -58,7 +58,7 @@ void draw() {
 			// call update on all enemies in array
 			for (int row = 0; row < enemyArray.length; ++row)
 			{
-				for(int column = 0; column < enemyArray[0].length; column++)
+				for(int column = 0; column < enemyArray[row].length; column++)
 				{
 					if(enemyArray[row][column] != null){
 						enemyArray[row][column].update(changeDir);
