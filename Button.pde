@@ -66,6 +66,13 @@ public class Button {
 				(y >= topEdge && y <= bottomEdge));
 	} // end overButton
 
+	// Returns true if mouse is over the button,
+	// false if not.
+	boolean mouseOver() {
+		return overButton(mouseX, mouseY);
+	}
+
+
 	// Set the edges of the button
 	void setEdges()
 	{
