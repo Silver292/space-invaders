@@ -26,7 +26,7 @@ void setup() {
 	// create buttons
 	startButton = new Button("START", width/2, height - 160,
 		150, 80, color(0,153,51), 7);
-	endButton = new Button("Return to title", width/2, height - 160,
+	endButton = new Button("Return to title", width/2, height - 240,
 		150, 80, color(0,153,51), 7);
 
 }
@@ -37,7 +37,7 @@ void draw() {
 	switch (gameState) {
 
 		case TITLE_SCREEN :
-			titleScreen();
+			drawScreen("Space Invaders", startButton);
 		break;
 
 		case GAME_PLAYING :
@@ -65,7 +65,8 @@ void draw() {
 
 		case GAME_OVER :
 		// TODO: Handle this, ensure that there is a win and lose screen
-			endScreen();
+			String endMessage = enemies <= 0 ? "Congratulations!" : "Game Over";
+			drawScreen(endMessage, endButton);
 		break;
 	}
 
@@ -120,43 +121,25 @@ void keyPressed() {
 
 }
 
-// Draws titles screen
-void titleScreen(){
-	background(0);
-	textAlign(CENTER);
-	textSize(32);
-	fill(255);
-	text("Space Invaders", width/2, 100);
+// Draws a screen with a title and a button
+void drawScreen(String title, Button button){
+  background(0);
+  textAlign(CENTER);
+  textSize(32);
+  fill(255);
+  text(title, width/2, 100);
 
-	// draw button
-	startButton.render();
+  // draw button
+  button.render();
 }
 
-// Draws end game screen
-void endScreen(){
-	String gameMessage;
-
-	if (enemies <= 0){
-		gameMessage = "Congratulations!";
-	} else {
-		gameMessage = "Game Over";
-	}
-
-	background(0);
-	textAlign(CENTER);
-	textSize(32);
-	fill(255);
-	text(gameMessage, width/2, 100);
-
-	// draw button
-	endButton.render();
-}
 
 // Get mouse clicks for button presses
-void mousePressed(){
-	if(startButton.overButton(mouseX, mouseY)){
+void mouseClicked(){
+	if(startButton.mouseOver()){
 		gameState = GAME_PLAYING;
-	} else if(endButton.overButton(mouseX, mouseY)){
-		gameState = TITLE_SCREEN; //TODO: FIX THIS!
+		gameInit();
+	} else if(endButton.mouseOver()){
+		gameState = TITLE_SCREEN;
 	}
 }
