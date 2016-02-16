@@ -22,7 +22,7 @@ void setup() {
 	// create buttons
 	startButton = new Button("START", width/2, height - 160,
 		150, 80, color(0,153,51), 7);
-	endButton = new Button("Return to title", width/2, height - 240,
+	endButton = new Button("Return to title", width/2, height - 160,
 		150, 80, color(0,153,51), 7);
 
 }
@@ -73,7 +73,7 @@ void draw() {
 		break;
 
 		case GAME_OVER :
-		// TODO: Handle this, ensure that there is a win and lose screen
+			// If there are enemies left the player must have died
 			String endMessage = enemies <= 0 ? "Congratulations!" : "Game Over";
 			drawScreen(endMessage, endButton);
 		break;
@@ -156,10 +156,10 @@ void drawScreen(String title, Button button){
 
 // Get mouse clicks for button presses
 void mouseClicked(){
-	if(startButton.mouseOver()){
+	if(startButton.mouseOver() && gameState == TITLE_SCREEN){
 		gameState = GAME_PLAYING;
 		gameInit();
-	} else if(endButton.mouseOver()){
+	} else if(endButton.mouseOver() && gameState == GAME_OVER){
 		gameState = TITLE_SCREEN;
 	}
 }
