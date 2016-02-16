@@ -39,6 +39,9 @@ void draw() {
 		case GAME_PLAYING :
 			// TODO: take this to its own place
 			background(255);
+
+			showUI(player.score);
+
 			player.update();
 
 			boolean changeDir = false;
@@ -93,7 +96,7 @@ void gameInit(){
 // Enemy creation
 void initEnemies() {
 	// row var
-	int rowHeight = 10;
+	int rowHeight = 60;
 
 	// loop through array
 	for (int row = 0; row < enemyArray.length; ++row)
@@ -161,4 +164,17 @@ void mouseClicked(){
 	} else if(endButton.mouseOver() && gameState == GAME_OVER){
 		gameState = TITLE_SCREEN;
 	}
+}
+
+
+// Displays player lives and score
+void showUI(int score) {
+
+	// Show score
+	textAlign(CENTER);
+	textSize(18);
+	fill(0);
+	text("SCORE: " + score, width/4 * 3, 30);
+
+	// TODO: Add lives
 }

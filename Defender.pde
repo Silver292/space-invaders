@@ -4,6 +4,7 @@ class Defender extends Ship {
 
 	ArrayList<Bullet> bullets;
     Invader[][] enemyArray; // Check all this this is new
+    int score = 0;
 
 	public Defender (int x, int y, int speed,
 	 color colour, Invader[][] enemyArray) //check enemyArray
@@ -51,6 +52,7 @@ class Defender extends Ship {
 							iterator.remove();
 							enemyArray[row][column] = null;
 							SpaceInvaders.enemies--; // TODO: Find a better way to do this
+							score += 10;
 						}
 					} // end inner inner for
 				} // end inner for
@@ -63,5 +65,5 @@ class Defender extends Ship {
 				bullet.update();
 			}// end bullet for
 		} //end if
-	}
-}
+	} // end method
+}// end class
