@@ -5,6 +5,7 @@ class Defender extends Ship {
 	ArrayList<Bullet> bullets;
     Invader[][] enemyArray; // Check all this this is new
     int score = 0;
+    int lives = 3;
 
 	public Defender (int x, int y, int speed,
 	 color colour, Invader[][] enemyArray) //check enemyArray

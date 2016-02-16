@@ -37,42 +37,7 @@ void draw() {
 		break;
 
 		case GAME_PLAYING :
-			// TODO: take this to its own place
-			background(255);
-
-			showUI(player.score);
-
-			player.update();
-
-			boolean changeDir = false;
-			// check if any enemies have hit the boundary
-			for (int row = 0; row < enemyArray.length; ++row)
-			{
-				for(int column = 0; column < enemyArray[row].length; column++)
-				{
-					// if enemy exits and will hit the edge next
-					if(enemyArray[row][column] != null && enemyArray[row][column].hitsEdge()){
-						//  change direction
-						changeDir = true;
-					}
-				}
-			}
-
-			// call update on all enemies in array
-			for (int row = 0; row < enemyArray.length; ++row)
-			{
-				for(int column = 0; column < enemyArray[row].length; column++)
-				{
-					if(enemyArray[row][column] != null){
-						enemyArray[row][column].update(changeDir);
-					}
-				}
-			}
-
-			// check for game end conditions
-			if (enemies <= 0){
-				gameState = GAME_OVER;
-			}
+			playGame();
 		break;
 
 		case GAME_OVER :
@@ -92,6 +57,25 @@ void gameInit(){
 	enemies = enemyRows * enemiesPerRow;
 }
 
+
+// Main game loop
+void playGame() {
+	// TODO: take this to its own place
+	background(255);
+
+	showUI(player.score);
+
+	player.update();
+
+	boolean changeDir = false;
+
+	changeDir = checkEnemyBoundaries();
+
+	updateEnemies(changeDir);
+
+	// check for game end conditions
+	checkGameOver();
+}
 
 // Enemy creation
 void initEnemies() {
@@ -141,7 +125,16 @@ void keyPressed() {
 
 }
 
-//TODO: Buttons are still active even when not on screen
+// Get mouse clicks for button presses
+void mouseClicked(){
+
+	if(startButton.mouseOver() && gameState == TITLE_SCREEN){
+		gameState = GAME_PLAYING;
+		gameInit();
+	} else if(endButton.mouseOver() && gameState == GAME_OVER){
+		gameState = TITLE_SCREEN;
+	}
+}
 
 // Draws a screen with a title and a button
 void drawScreen(String title, Button button){
@@ -155,18 +148,6 @@ void drawScreen(String title, Button button){
 	button.render();
 }
 
-
-// Get mouse clicks for button presses
-void mouseClicked(){
-	if(startButton.mouseOver() && gameState == TITLE_SCREEN){
-		gameState = GAME_PLAYING;
-		gameInit();
-	} else if(endButton.mouseOver() && gameState == GAME_OVER){
-		gameState = TITLE_SCREEN;
-	}
-}
-
-
 // Displays player lives and score
 void showUI(int score) {
 
@@ -177,4 +158,40 @@ void showUI(int score) {
 	text("SCORE: " + score, width/4 * 3, 30);
 
 	// TODO: Add lives
+}
+
+// Checks for game ending changes
+void checkGameOver() {
+	// TODO: Add death for player
+	if (enemies <= 0 || player.lives <=0){
+		gameState = GAME_OVER;
+	}
+}
+
+boolean checkEnemyBoundaries() {
+	// check if any enemies have hit the boundary
+	for (int row = 0; row < enemyArray.length; ++row)
+	{
+		for(int column = 0; column < enemyArray[row].length; column++)
+		{
+			// if enemy exits and will hit the edge next
+			if (enemyArray[row][column] != null && enemyArray[row][column].hitsEdge())
+				return true;
+		}
+	}
+
+	return false;
+}
+
+void updateEnemies(boolean changeDir) {
+	// call update on all enemies in array
+	for (int row = 0; row < enemyArray.length; ++row)
+	{
+		for(int column = 0; column < enemyArray[row].length; column++)
+		{
+			if(enemyArray[row][column] != null){
+				enemyArray[row][column].update(changeDir);
+			}
+		}
+	}
 }
