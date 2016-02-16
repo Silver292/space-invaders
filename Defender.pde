@@ -17,6 +17,18 @@ class Defender extends Ship {
 
 	void update(){
 		super.update();
+		updateBullets();
+	}
+
+	void shoot()
+	{
+		Bullet bullet = new Bullet(x + shipWidth/2, y, 5);
+		bullets.add(bullet);
+	}
+
+
+	// updates all bullets the defender has fired
+	void updateBullets(){
 		// check there are bullets
 		if(!bullets.isEmpty()){
 			// update all bullets, using iterator to remove collided bullets
@@ -51,11 +63,5 @@ class Defender extends Ship {
 				bullet.update();
 			}// end bullet for
 		} //end if
-	}
-
-	void shoot()
-	{
-		Bullet bullet = new Bullet(x + shipWidth/2, y, 5);
-		bullets.add(bullet);
 	}
 }
