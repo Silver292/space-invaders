@@ -21,11 +21,12 @@ class Bullet extends GameObject{
 
 	boolean hasCollided(Invader enemy)
 	{
-		if((this.x >= enemy.x && this.x <= enemy.x + enemy.shipWidth) &&
+		int rightEdge = x + bulletWidth;
+
+		if( (rightEdge >= enemy.x && this.x <= enemy.x + enemy.shipWidth) &&
 			(this.y >= enemy.y &&  this.y <= enemy.y + enemy.shipHeight)){
-			println("Hit!"); //TODO: Debug code to be removec
-			println("SpaceInvaders.enemies: "+SpaceInvaders.enemies);
-		return true;
+
+			return true;
 		} // end if
 
 		return false;
