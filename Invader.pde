@@ -1,7 +1,5 @@
 class Invader extends Ship {
 
-	int moveCounter = 0;
-
 	public Invader (int x, int y, int speed,
 		color colour)
 	{
@@ -27,42 +25,17 @@ class Invader extends Ship {
 		} else {
 			moveX();
 		}
-		// move down
-		// change direction
-
-		// move x
-
-/*        // patterened movement
-		if (moveCounter > 15) {
-			moveY();
-		} else {
-			moveX();
-		}
-
-		moveCounter++;
-
-        // change direction after amount
-		if (moveCounter >=30) {
-			moveCounter = 0;
-			xDirection = -xDirection;
-		}*/
 
 	}
 
+	// moves the invader across the screen
 	void moveX() {
-		int nextX = x + (xDirection * speed);
-
-		// Stop on boundary
-		if (!inXBounds(nextX)) {
-			nextX = x;
-		}
-		x = nextX;
+		x = x + (xDirection * speed);
 	} // end move
 
-	// TODO: look at this
+	// moves in the invader down the screen
 	void moveY() {
-		int nextY = y + shipHeight;
-		y = nextY;
+		y = y + shipHeight;
 	}
 
 }
