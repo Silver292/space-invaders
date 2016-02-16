@@ -9,8 +9,8 @@ Bullet bullet;
 Invader enemy;
 Invader[][] enemyArray;
 Button startButton, endButton;
-public static int enemiesPerRow = 3; // enemy amount per row
-public static int enemyRows = 2;
+public static int enemiesPerRow = 10; // enemy amount per row
+public static int enemyRows = 5;
 public static int enemies; // total enemies
 int gameState;
 
@@ -93,20 +93,19 @@ void gameInit(){
 // Enemy creation
 void initEnemies() {
 	// row var
-	int rowHeight;
+	int rowHeight = 10;
 
 	// loop through array
 	for (int row = 0; row < enemyArray.length; ++row)
 	{
 		for(int column = 0; column < enemyArray[0].length; column++)
 		{
-			// check which row
-			rowHeight = row > 0 ? 65 : 10;
-
-			// create enemies to fill array
-			enemyArray[row][column] = new Invader(column * 55, rowHeight, 8, #FF0004);
+			// create enemies to fill array TODO: Fix spacing number to use width of enemy
+			enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, 8, #FF0004);
 		}
 
+		// change row height
+		rowHeight += 55;
 	}
 }
 
