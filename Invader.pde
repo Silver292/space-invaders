@@ -9,8 +9,30 @@ class Invader extends Ship {
 		xDirection = 1;
 	} // end constructor
 
-	void move() {
-        // patterened movement
+	//updates invader and changes direction based on boolean passed
+	void update(boolean changeDir){
+		move(changeDir);
+		render();
+	}
+
+	void move(boolean changeDir) {
+		// Slower movements speed
+		if (frameCount % 40 != 0)
+			return;
+
+		// if changeDir
+		if (changeDir) {
+			moveY();
+			xDirection = -xDirection;
+		} else {
+			moveX();
+		}
+		// move down
+		// change direction
+
+		// move x
+
+/*        // patterened movement
 		if (moveCounter > 15) {
 			moveY();
 		} else {
@@ -23,9 +45,8 @@ class Invader extends Ship {
 		if (moveCounter >=30) {
 			moveCounter = 0;
 			xDirection = -xDirection;
-		}
+		}*/
 
-		render();
 	}
 
 	void moveX() {
@@ -38,9 +59,9 @@ class Invader extends Ship {
 		x = nextX;
 	} // end move
 
+	// TODO: look at this
 	void moveY() {
-		int nextY = y + speed;
-
+		int nextY = y + shipHeight;
 		y = nextY;
 	}
 

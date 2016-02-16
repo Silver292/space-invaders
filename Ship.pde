@@ -18,9 +18,20 @@ class Ship extends GameObject {
 		return (nextX > 0 && nextX + shipWidth < width);
 	} // end inXBounds()
 
+
+	// returns the next x coord
+	int getNextX() {
+		return x + (xDirection * speed);
+	}
+
+	// returns true if the next x location will hot the edge of the screen
+	boolean hitsEdge(){
+		return !inXBounds(getNextX());
+	}
+
 	void move() {
 		// get next location
-		int nextX = x + (xDirection * speed);
+		int nextX = getNextX();
 
 		// check if in bounds
 		if(inXBounds(nextX)) {

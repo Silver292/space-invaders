@@ -9,7 +9,7 @@ Bullet bullet;
 Invader enemy;
 Invader[][] enemyArray;
 Button startButton, endButton;
-public static int enemiesPerRow = 10; // enemy amount per row
+public static int enemiesPerRow = 3; // enemy amount per row
 public static int enemyRows = 2;
 public static int enemies; // total enemies
 int gameState;
@@ -41,16 +41,29 @@ void draw() {
 			background(255);
 			player.update();
 
-			// loop through array
+			boolean changeDir = false;
+			// check if any enemies have hit the boundary
+			for (int row = 0; row < enemyArray.length; ++row)
+			{
+				for(int column = 0; column < enemyArray[0].length; column++)
+				{
+					// if enemy exits and will hit the edge next
+					if(enemyArray[row][column] != null && enemyArray[row][column].hitsEdge()){
+						//  change direction
+						changeDir = true;
+					}
+				}
+			}
+
+			// call update on all enemies in array
 			for (int row = 0; row < enemyArray.length; ++row)
 			{
 				for(int column = 0; column < enemyArray[0].length; column++)
 				{
 					if(enemyArray[row][column] != null){
-						enemyArray[row][column].update();
+						enemyArray[row][column].update(changeDir);
 					}
 				}
-
 			}
 
 			// check for game end conditions
@@ -91,7 +104,7 @@ void initEnemies() {
 			rowHeight = row > 0 ? 65 : 10;
 
 			// create enemies to fill array
-			enemyArray[row][column] = new Invader(column * 55, rowHeight, 1, #FF0004);
+			enemyArray[row][column] = new Invader(column * 55, rowHeight, 8, #FF0004);
 		}
 
 	}
@@ -125,6 +138,8 @@ void keyPressed() {
 	}
 
 }
+
+//TODO: Buttons are still active even when not on screen
 
 // Draws a screen with a title and a button
 void drawScreen(String title, Button button){
