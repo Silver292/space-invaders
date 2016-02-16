@@ -142,14 +142,14 @@ void keyPressed() {
 
 // Draws a screen with a title and a button
 void drawScreen(String title, Button button){
-  background(0);
-  textAlign(CENTER);
-  textSize(32);
-  fill(255);
-  text(title, width/2, 100);
+	background(0);
+	textAlign(CENTER);
+	textSize(32);
+	fill(255);
+	text(title, width/2, 100);
 
-  // draw button
-  button.render();
+	// draw button
+	button.render();
 }
 
 
