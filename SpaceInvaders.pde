@@ -11,7 +11,7 @@ Invader[][] enemyArray;
 Button startButton, endButton;
 public static int enemiesPerRow = 10; // enemy amount per row
 public static int enemyRows = 2;
-public static int enemies = enemyRows * enemiesPerRow; // total enemies
+public static int enemies; // total enemies
 int gameState;
 
 
@@ -19,10 +19,6 @@ void setup() {
 	size(565, 600);
 
 	gameState = TITLE_SCREEN;
-
-	enemyArray = new Invader[enemyRows][enemiesPerRow];
-	initEnemies();
-	player = new Defender(250, 530, 5, #CBCBCB, enemyArray);
 	// create buttons
 	startButton = new Button("START", width/2, height - 160,
 		150, 80, color(0,153,51), 7);
@@ -71,6 +67,15 @@ void draw() {
 	}
 
 }
+
+// Game setup
+void gameInit(){
+	enemyArray = new Invader[enemyRows][enemiesPerRow];
+	initEnemies();
+	player = new Defender(250, 530, 5, #CBCBCB, enemyArray);
+	enemies = enemyRows * enemiesPerRow;
+}
+
 
 // Enemy creation
 void initEnemies() {
