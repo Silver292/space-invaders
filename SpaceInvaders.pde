@@ -13,7 +13,7 @@ public static int enemiesPerRow = 10; // enemy amount per row
 public static int enemyRows = 5;
 public static int enemies; // total enemies
 int gameState;
-Bolean enemyReachedEnd = false;
+Boolean enemyReachedEnd = false;
 
 PImage background;
 
@@ -165,7 +165,7 @@ void showUI(int score) {
 	// Show score
 	textAlign(CENTER);
 	textSize(18);
-	fill(0);
+	fill(255);
 	text("SCORE: " + score, width/4 * 3, 30);
 
 	// TODO: Add lives
@@ -185,7 +185,7 @@ boolean checkEnemyBoundaries() {
 	{
 		for(int column = 0; column < enemyArray[row].length; column++)
 		{
-			// if enemy exits and will hit the edge next
+			// if enemy exists and will hit the edge next
 			if (enemyArray[row][column] != null && enemyArray[row][column].hitsEdge())
 				return true;
 		}
