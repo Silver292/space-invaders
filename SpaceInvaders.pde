@@ -13,7 +13,9 @@ public static int enemiesPerRow = 10; // enemy amount per row
 public static int enemyRows = 5;
 public static int enemies; // total enemies
 int gameState;
+Bolean enemyReachedEnd = false;
 
+PImage background;
 
 void setup() {
 	size(565, 600);
@@ -25,6 +27,8 @@ void setup() {
 	endButton = new Button("Return to title", width/2, height - 160,
 		150, 80, color(0,153,51), 7);
 
+    // Load background
+    background = loadImage("assets/Ship.png");
 }
 
 void draw() {
@@ -53,15 +57,14 @@ void draw() {
 void gameInit(){
 	enemyArray = new Invader[enemyRows][enemiesPerRow];
 	initEnemies();
-	player = new Defender(250, 530, 5, #CBCBCB, enemyArray);
+	player = new Defender(250, 545, 5, #CBCBCB, "assets/Defender.png", enemyArray);
 	enemies = enemyRows * enemiesPerRow;
 }
 
 
 // Main game loop
 void playGame() {
-	// TODO: take this to its own place
-	background(255);
+	drawBackground();
 
 	showUI(player.score);
 
@@ -88,7 +91,7 @@ void initEnemies() {
 		for(int column = 0; column < enemyArray[0].length; column++)
 		{
 			// create enemies to fill array TODO: Fix spacing number to use width of enemy
-			enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, 8, #FF0004);
+			enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, 8, #FF0004, "assets/crabInvader1.png", "assets/crabInvader2.png");
 		}
 
 		// change row height
@@ -148,6 +151,14 @@ void drawScreen(String title, Button button){
 	button.render();
 }
 
+// draws the background
+void drawBackground() {
+    background(0);
+    image(background, 0, 573);
+
+
+}
+
 // Displays player lives and score
 void showUI(int score) {
 
@@ -163,7 +174,7 @@ void showUI(int score) {
 // Checks for game ending changes
 void checkGameOver() {
 	// TODO: Add death for player
-	if (enemies <= 0 || player.lives <=0){
+	if (enemies <= 0 || player.lives <=0 || enemyReachedEnd){
 		gameState = GAME_OVER;
 	}
 }

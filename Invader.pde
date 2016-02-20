@@ -1,9 +1,15 @@
 class Invader extends Ship {
 
+    PImage sprite1, sprite2;
+    int animCounter = 1;
+
 	public Invader (int x, int y, int speed,
-		color colour)
+		color colour, String image1, String image2)
 	{
-		super(x, y, speed, colour);
+		super(x, y, speed, colour, image1);
+
+        sprite1 = sprite;
+        sprite2 = loadImage(image2);
 		xDirection = 1;
 	} // end constructor
 
@@ -26,6 +32,14 @@ class Invader extends Ship {
 			moveX();
 		}
 
+        if (animCounter >= 1) {
+            sprite = sprite2;
+            animCounter = 0;
+            return;
+        }
+
+        sprite = sprite1;
+        animCounter++;
 	}
 
 	// moves the invader across the screen

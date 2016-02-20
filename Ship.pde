@@ -4,12 +4,24 @@ class Ship extends GameObject {
 	int shipHeight = 25;
 	// TODO: Remove once images are in
 	color colour;
+    PImage sprite;
 
 	public Ship (int x, int y, int speed,
 			color colour) {
 		super(x, y, speed);
 		this.colour = colour;
 	} // end constructor
+
+    // TODO: This will be the real constructor when everything has an image
+    public Ship (int x, int y, int speed,
+            color colour, String image) {
+        super(x, y, speed);
+        this.colour = colour;
+        sprite = loadImage(image);
+
+        shipWidth = sprite.width;
+        shipHeight = sprite.height;
+    } // end constructor
 
 	// checks the next X location and returns true
 	// if within bounds else returns false
@@ -40,9 +52,6 @@ class Ship extends GameObject {
 	} // end move()
 
 	void render() {
-		stroke(0);
-		fill(colour);
-		rectMode(CORNER);
-		rect(x, y, shipWidth, shipHeight);
+		image(sprite, x, y);
 	} // end render
 }

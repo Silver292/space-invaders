@@ -8,12 +8,11 @@ class Defender extends Ship {
     int lives = 3;
 
 	public Defender (int x, int y, int speed,
-	 color colour, Invader[][] enemyArray) //check enemyArray
+	 color colour, String image, Invader[][] enemyArray) //check enemyArray
 	{
-		super(x, y, speed, colour);
+		super(x, y, speed, colour, image);
 		bullets = new ArrayList<Bullet>();
         this.enemyArray = enemyArray;
-
 	} // end constructor
 
 
@@ -28,6 +27,10 @@ class Defender extends Ship {
 		bullets.add(bullet);
 	}
 
+    // TODO: move this to ship or gameObject
+    void render(){
+        image(sprite, x, y);
+    }
 
 	// updates all bullets the defender has fired
 	void updateBullets(){
