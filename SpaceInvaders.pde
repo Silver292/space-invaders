@@ -84,14 +84,29 @@ void playGame() {
 void initEnemies() {
 	// row var
 	int rowHeight = 60;
+    String imageOne, imageTwo;
 
 	// loop through array
 	for (int row = 0; row < enemyArray.length; ++row)
 	{
 		for(int column = 0; column < enemyArray[0].length; column++)
 		{
+
+            // Assign enemy image based on row
+            if(row < 1) {
+                imageOne = "assets/squid1.png";
+                imageTwo = "assets/squid2.png";
+            } else if (row < 3) {
+                imageOne = "assets/crab1.png";
+                imageTwo = "assets/crab2.png";
+            } else {
+                imageOne = "assets/skull1.png";
+                imageTwo = "assets/skull2.png";
+            }
+
+
 			// create enemies to fill array TODO: Fix spacing number to use width of enemy
-			enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, 8, #FF0004, "assets/crabInvader1.png", "assets/crabInvader2.png");
+			enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, 8, #FF0004, imageOne, imageTwo);
 		}
 
 		// change row height
