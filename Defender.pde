@@ -48,10 +48,10 @@ class Defender extends Ship {
 
 						// check for collision and remove bullet and enemy if there is one
 						if(bullet.hasCollided(enemyArray[row][column])){
-							iterator.remove();
-							enemyArray[row][column] = null;
-							SpaceInvaders.enemies--; // TODO: Find a better way to do this
-							score += 10;
+							score += enemyArray[row][column].getPoints();
+                            iterator.remove();
+                            enemyArray[row][column] = null;
+                            SpaceInvaders.enemies--; // TODO: Find a better way to do this
 						}
 					} // end inner inner for
 				} // end inner for
@@ -65,4 +65,9 @@ class Defender extends Ship {
 			}// end bullet for
 		} //end if
 	} // end method
+
+    // returns current score
+    int getScore() {
+        return score;
+    }
 }// end class

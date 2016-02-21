@@ -66,7 +66,7 @@ void gameInit(){
 void playGame() {
 	drawBackground();
 
-	showUI(player.score);
+	showUI(player);
 
 	player.update();
 
@@ -84,6 +84,7 @@ void playGame() {
 void initEnemies() {
 	// row var
 	int rowHeight = 60;
+    int points;
     String imageOne, imageTwo;
 
 	// loop through array
@@ -96,17 +97,21 @@ void initEnemies() {
             if(row < 1) {
                 imageOne = "assets/squid1.png";
                 imageTwo = "assets/squid2.png";
+                points = 30;
+
             } else if (row < 3) {
                 imageOne = "assets/crab1.png";
                 imageTwo = "assets/crab2.png";
+                points = 20;
             } else {
                 imageOne = "assets/skull1.png";
                 imageTwo = "assets/skull2.png";
+                points = 10;
             }
 
 
 			// create enemies to fill array TODO: Fix spacing number to use width of enemy
-			enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, 8, #FF0004, imageOne, imageTwo);
+			enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, points, imageOne, imageTwo);
 		}
 
 		// change row height
@@ -162,8 +167,27 @@ void drawScreen(String title, Button button){
 	fill(255);
 	text(title, width/2, 100);
 
+    if (gameState == GAME_OVER) {
+        showPoints(player);
+    }
+
 	// draw button
 	button.render();
+}
+
+// Shows the players points at the end of the game
+void showPoints(Defender player) {
+    int score = player.getScore();
+
+    textAlign(CENTER);
+    textSize(32);
+    fill(255);
+    text("SCORE", width/2, height/2);
+
+    textAlign(CENTER);
+    textSize(32);
+    fill(255);
+    text(score, width/2, height/2 + 50);
 }
 
 // draws the background
@@ -175,13 +199,13 @@ void drawBackground() {
 }
 
 // Displays player lives and score
-void showUI(int score) {
+void showUI(Defender player) {
 
 	// Show score
 	textAlign(CENTER);
 	textSize(18);
 	fill(255);
-	text("SCORE: " + score, width/4 * 3, 30);
+	text("SCORE: " + player.getScore(), width/4 * 3, 30);
 
 	// TODO: Add lives
 }

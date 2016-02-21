@@ -2,15 +2,26 @@ class Invader extends Ship {
 
     PImage sprite1, sprite2;
     int animCounter = 1;
+    int points = 10;
 
-	public Invader (int x, int y, int speed,
-		color colour, String image1, String image2)
+    public Invader (int x, int y, int points, String image1, String image2)
+    {
+        super(x, y, 8, image1);
+
+        sprite1 = sprite;
+        sprite2 = loadImage(image2);
+        xDirection = 1;
+        this.points = points;
+    } // end constructor
+
+	public Invader (int x, int y, int speed, int points, String image1, String image2)
 	{
-		super(x, y, speed, colour, image1);
+		super(x, y, speed, image1);
 
         sprite1 = sprite;
         sprite2 = loadImage(image2);
 		xDirection = 1;
+        this.points = points;
 	} // end constructor
 
 	//updates invader and changes direction based on boolean passed
@@ -52,4 +63,8 @@ class Invader extends Ship {
 		y = y + shipHeight;
 	}
 
+    // returns the invaders points
+    int getPoints() {
+        return points;
+    }
 }
