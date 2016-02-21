@@ -15,7 +15,6 @@ class Ship extends GameObject {
 	// checks the next X location and returns true
 	// if within bounds else returns false
 	boolean inXBounds(int nextX) {
-		// TODO: Will need updating with image sizes
 		return (nextX > 0 && nextX + shipWidth < width);
 	} // end inXBounds()
 
