@@ -57,7 +57,7 @@ void draw() {
 void gameInit(){
 	enemyArray = new Invader[enemyRows][enemiesPerRow];
 	initEnemies();
-	player = new Defender(250, 545, 5, #CBCBCB, "assets/Defender.png", enemyArray);
+	player = new Defender(250, 532, 5, #CBCBCB, "assets/Defender.png", enemyArray);
 	enemies = enemyRows * enemiesPerRow;
 }
 
@@ -154,7 +154,7 @@ void drawScreen(String title, Button button){
 // draws the background
 void drawBackground() {
     background(0);
-    image(background, 0, 573);
+    image(background, 0, 560);
 
 
 }
