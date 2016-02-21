@@ -57,7 +57,7 @@ void draw() {
 void gameInit(){
 	enemyArray = new Invader[enemyRows][enemiesPerRow];
 	initEnemies();
-	player = new Defender(250, 532, 5, #CBCBCB, "assets/Defender.png", enemyArray);
+	player = new Defender(250, 532, 5, "assets/Defender.png", enemyArray);
 	enemies = enemyRows * enemiesPerRow;
 }
 

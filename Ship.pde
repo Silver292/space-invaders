@@ -2,21 +2,10 @@ class Ship extends GameObject {
 	int xDirection;
 	int shipWidth = 25;
 	int shipHeight = 25;
-	// TODO: Remove once images are in
-	color colour;
     PImage sprite;
 
-	public Ship (int x, int y, int speed,
-			color colour) {
-		super(x, y, speed);
-		this.colour = colour;
-	} // end constructor
-
-    // TODO: This will be the real constructor when everything has an image
-    public Ship (int x, int y, int speed,
-            color colour, String image) {
+    public Ship (int x, int y, int speed, String image) {
         super(x, y, speed);
-        this.colour = colour;
         sprite = loadImage(image);
 
         shipWidth = sprite.width;
