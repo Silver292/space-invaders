@@ -3,13 +3,24 @@ class Bullet extends GameObject{
 	boolean inGame = true;
 	int bulletWidth = 5;
 	int bulletHeight = 10;
+	int bulletType;
 
-	Bullet(int x, int y, int speed) {
+	final int ENEMY = 0;
+	final int PLAYER = 1;
+
+	Bullet(int x, int y, int speed, int type) {
 		super(x, y, speed);
+		bulletType = type;
 	} // end constructor
 
 	// bullet movement
 	void move() {
+
+		if (bulletType == ENEMY){
+			y += speed;
+			return;
+		}
+
 		y -= speed;
 	} // end move
 

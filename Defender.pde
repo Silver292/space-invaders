@@ -17,7 +17,7 @@ class Defender extends Ship {
 
 	Bullet shoot()
 	{
-		return new Bullet(x + shipWidth/2, y, 5);
+		return new Bullet(x + shipWidth/2, y, 5, 1);
 	}
 
 	void addPoints(int points)
