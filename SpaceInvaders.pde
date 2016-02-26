@@ -265,6 +265,12 @@ void updateBullets(){
     {
         // Get the bullet
         Bullet bullet = iterator.next();
+
+        // remove bullet if off the screen
+        if(!bullet.onScreen()){
+            iterator.remove();
+        }
+
         // iterate over enemies to check collision
         for (int row = 0; row < enemyArray.length; ++row)
         {
@@ -280,15 +286,10 @@ void updateBullets(){
                     player.addPoints(enemyArray[row][column].getPoints());
                     iterator.remove();
                     enemyArray[row][column] = null;
-                    enemies--; // TODO: Find a better way to do this
+                    enemies--;
                 }
             } // end inner inner for
         } // end inner for
-
-        // remove bullet if off the screen
-        if(!bullet.onScreen()){
-            iterator.remove();
-        }
 
         bullet.update();
     }// end bullet for
