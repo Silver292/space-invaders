@@ -34,7 +34,7 @@ void setup() {
     background = loadImage("assets/Ship.png");
 
     // create bullet list
-    bullets = new ArrayList<Bullets>();
+    bullets = new ArrayList<Bullet>();
 }
 
 void draw() {
@@ -75,6 +75,8 @@ void playGame() {
 	showUI(player);
 
 	player.update();
+
+	updateBullets();
 
 	boolean changeDir = false;
 
@@ -149,7 +151,7 @@ void keyPressed() {
 		}
 	}
 	if (key == ' ' ){
-		player.shoot();
+		bullets.add(player.shoot());
 	}
 
 }
@@ -253,39 +255,41 @@ void updateEnemies(boolean changeDir) {
 }
 
 void updateBullets(){
-    // check there are bullets
-    if(!bullets.isEmpty()){
-        // update all bullets, using iterator to remove collided bullets
-        for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();)
+	// check there are bullets
+	if(bullets.isEmpty()){
+		return;
+	}
+
+    // update all bullets, using iterator to remove collided bullets
+    for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();)
+    {
+        // Get the bullet
+        Bullet bullet = iterator.next();
+        // iterate over enemies to check collision
+        for (int row = 0; row < enemyArray.length; ++row)
         {
-            // Get the bullet
-            Bullet bullet = iterator.next();
-            // iterate over enemies to check collision
-            for (int row = 0; row < enemyArray.length; ++row)
+            for(int column = 0; column < enemyArray[row].length; ++column)
             {
-                for(int column = 0; column < enemyArray[row].length; ++column)
-                {
-                    // skip dead enemies
-                    if(enemyArray[row][column] == null){
-                        continue;
-                    }
+                // skip dead enemies
+                if(enemyArray[row][column] == null){
+                    continue;
+                }
 
-                    // check for collision and remove bullet and enemy if there is one
-                    if(bullet.hasCollided(enemyArray[row][column])){
-                        score += enemyArray[row][column].getPoints();
-                        iterator.remove();
-                        enemyArray[row][column] = null;
-                        SpaceInvaders.enemies--; // TODO: Find a better way to do this
-                    }
-                } // end inner inner for
-            } // end inner for
+                // check for collision and remove bullet and enemy if there is one
+                if(bullet.hasCollided(enemyArray[row][column])){
+                    player.addPoints(enemyArray[row][column].getPoints());
+                    iterator.remove();
+                    enemyArray[row][column] = null;
+                    enemies--; // TODO: Find a better way to do this
+                }
+            } // end inner inner for
+        } // end inner for
 
-            // remove bullet if off the screen
-            if(!bullet.onScreen()){
-                iterator.remove();
-            }
+        // remove bullet if off the screen
+        if(!bullet.onScreen()){
+            iterator.remove();
+        }
 
-            bullet.update();
-        }// end bullet for
-    } //end if
+        bullet.update();
+    }// end bullet for
 } // end method

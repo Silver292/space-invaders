@@ -15,56 +15,15 @@ class Defender extends Ship {
         this.enemyArray = enemyArray;
 	} // end constructor
 
-
-	void update(){
-		super.update();
-		updateBullets();
-	}
-
-	void shoot()
+	Bullet shoot()
 	{
-		Bullet bullet = new Bullet(x + shipWidth/2, y, 5);
-		bullets.add(bullet);
+		return new Bullet(x + shipWidth/2, y, 5);
 	}
 
-	// updates all bullets the defender has fired
-	void updateBullets(){
-		// check there are bullets
-		if(!bullets.isEmpty()){
-			// update all bullets, using iterator to remove collided bullets
-			for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();)
-			{
-				// Get the bullet
-				Bullet bullet = iterator.next();
-				// iterate over enemies to check collision
-				for (int row = 0; row < enemyArray.length; ++row)
-				{
-					for(int column = 0; column < enemyArray[row].length; ++column)
-					{
-						// skip dead enemies
-						if(enemyArray[row][column] == null){
-							continue;
-						}
-
-						// check for collision and remove bullet and enemy if there is one
-						if(bullet.hasCollided(enemyArray[row][column])){
-							score += enemyArray[row][column].getPoints();
-                            iterator.remove();
-                            enemyArray[row][column] = null;
-                            SpaceInvaders.enemies--; // TODO: Find a better way to do this
-						}
-					} // end inner inner for
-				} // end inner for
-
-				// remove bullet if off the screen
-				if(!bullet.onScreen()){
-					iterator.remove();
-				}
-
-				bullet.update();
-			}// end bullet for
-		} //end if
-	} // end method
+	void addPoints(int points)
+	{
+		score += points;
+	}
 
     // returns current score
     int getScore() {
