@@ -266,30 +266,38 @@ void updateBullets(){
         // Get the bullet
         Bullet bullet = iterator.next();
 
-        // remove bullet if off the screen
-        if(!bullet.onScreen()){
-            iterator.remove();
+        // check player bullets for collision with enemy
+        if(bullet.getBulletType() == 1)
+        {
+	        // remove bullet if off the screen
+	        if(!bullet.onScreen()){
+	            iterator.remove();
+	        }
+
+	        // iterate over enemies to check collision
+	        for (int row = 0; row < enemyArray.length; ++row)
+	        {
+	            for(int column = 0; column < enemyArray[row].length; ++column)
+	            {
+	                // skip dead enemies
+	                if(enemyArray[row][column] == null){
+	                    continue;
+	                }
+
+	                // check for collision and remove bullet and enemy if there is one
+	                if(bullet.hasCollided(enemyArray[row][column])){
+	                    player.addPoints(enemyArray[row][column].getPoints());
+	                    iterator.remove();
+	                    enemyArray[row][column] = null;
+	                    enemies--;
+	                }
+	            } // end inner inner for
+	        } // end inner for
+        } else if(bullet.getBulletType() == 0) {
+        	// enemy bullet code goes here
         }
 
-        // iterate over enemies to check collision
-        for (int row = 0; row < enemyArray.length; ++row)
-        {
-            for(int column = 0; column < enemyArray[row].length; ++column)
-            {
-                // skip dead enemies
-                if(enemyArray[row][column] == null){
-                    continue;
-                }
 
-                // check for collision and remove bullet and enemy if there is one
-                if(bullet.hasCollided(enemyArray[row][column])){
-                    player.addPoints(enemyArray[row][column].getPoints());
-                    iterator.remove();
-                    enemyArray[row][column] = null;
-                    enemies--;
-                }
-            } // end inner inner for
-        } // end inner for
 
         bullet.update();
     }// end bullet for

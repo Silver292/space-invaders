@@ -52,4 +52,9 @@ class Bullet extends GameObject{
 
 		return true;
 	}// end onScreen
+
+	// returns bulletType
+	int getBulletType(){
+		return bulletType;
+	}
 }
