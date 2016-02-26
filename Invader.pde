@@ -26,6 +26,10 @@ class Invader extends Ship {
 
 	//updates invader and changes direction based on boolean passed
 	void update(boolean changeDir){
+        // check object is still in play
+        if(destroyed){
+            return;
+        }
 		move(changeDir);
 		render();
 	}
