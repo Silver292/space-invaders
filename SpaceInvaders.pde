@@ -226,7 +226,6 @@ void showUI(Defender player) {
 
 // Checks for game ending changes
 void checkGameOver() {
-	// TODO: Add death for player
 	if (enemies <= 0 || player.lives <=0 || enemyReachedEnd){
 		gameState = GAME_OVER;
 	}
