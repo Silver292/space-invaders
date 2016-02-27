@@ -243,14 +243,20 @@ boolean checkEnemyBoundaries() {
 
 void updateEnemies(boolean changeDir) {
 	// call update on all enemies in array
-	for (int row = 0; row < enemyArray.length; ++row)
-	{
-		for(int column = 0; column < enemyArray[row].length; column++)
-		{
-			if(enemyArray[row][column] != null){
-				enemyArray[row][column].update(changeDir);
-			}
-		}
+	for (int row = 0; row < enemyArray.length; ++row) {
+        for (int column = 0; column < enemyArray[row].length; ++column) {
+
+            if(enemyArray[row][column] == null){
+                continue;
+             }
+
+            enemyArray[row][column].update(changeDir);
+
+            bullet = enemyArray[row][column].shoot();
+            if(bullet != null) {
+                bullets.add(bullet);
+            }
+        } // end inner for
 	}
 }
 
