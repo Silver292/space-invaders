@@ -25,4 +25,14 @@ class Defender extends Ship {
     int getScore() {
         return score;
     }
+
+    // returns lives
+    int getLives() {
+        return lives;
+    }
+
+    // reduces player lives
+    void getHit() {
+        --lives;
+    }
 }// end class

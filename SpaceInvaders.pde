@@ -215,7 +215,13 @@ void showUI(Defender player) {
 	fill(255);
 	text("SCORE: " + player.getScore(), width/4 * 3, 30);
 
-	// TODO: Add lives
+	// Show lives
+    // Show score
+    textAlign(CENTER);
+    textSize(18);
+    fill(255);
+    text("LIVES: " + player.getLives(), width/4, 30);
+
 }
 
 // Checks for game ending changes
@@ -300,10 +306,12 @@ void updateBullets(){
 	            } // end inner inner for
 	        } // end inner for
         } else if(bullet.getBulletType() == 0) {
-        	// enemy bullet code goes here
+        	// check if player is hit
+            if(bullet.hasCollided(player)) {
+                player.getHit();
+                iterator.remove();
+            }
         }
-
-
 
         bullet.update();
     }// end bullet for
