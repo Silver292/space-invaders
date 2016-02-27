@@ -30,12 +30,12 @@ class Bullet extends GameObject{
 		rect(x, y, bulletWidth, bulletHeight);
 	} // end render
 
-	boolean hasCollided(Invader enemy)
+	boolean hasCollided(Ship ship)
 	{
 		int rightEdge = x + bulletWidth;
 
-		if( (rightEdge >= enemy.x && this.x <= enemy.x + enemy.shipWidth) &&
-			(this.y >= enemy.y &&  this.y <= enemy.y + enemy.shipHeight)){
+		if( (rightEdge >= ship.x && this.x <= ship.x + ship.shipWidth) &&
+			(this.y >= ship.y &&  this.y <= ship.y + ship.shipHeight)){
 
 			return true;
 		} // end if
