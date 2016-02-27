@@ -6,6 +6,8 @@ class Invader extends Ship {
     int animCounter = 1;
     int points = 10;
     int bulletTime = 0;
+    int bulletTimeMax = 250;
+    Random rand;
 
     public Invader (int x, int y, int points, String image1, String image2)
     {
@@ -15,6 +17,8 @@ class Invader extends Ship {
         sprite2 = loadImage(image2);
         xDirection = 1;
         this.points = points;
+        rand = new Random();
+        bulletTime = rand.nextInt(bulletTimeMax);
     } // end constructor
 
 	public Invader (int x, int y, int speed, int points, String image1, String image2)
@@ -25,6 +29,8 @@ class Invader extends Ship {
         sprite2 = loadImage(image2);
 		xDirection = 1;
         this.points = points;
+        rand = new Random();
+        bulletTime = rand.nextInt(bulletTimeMax);
 	} // end constructor
 
 	//updates invader and changes direction based on boolean passed
@@ -61,13 +67,10 @@ class Invader extends Ship {
 	}
 
     Bullet shoot() {
-        Random rand = new Random();
-
-        if(rand.nextFloat() < 0.1 && bulletTime >= 60){
+        if(rand.nextDouble() < 0.05 && ++bulletTime >= bulletTimeMax){
             bulletTime = 0;
             return new EnemyBullet(x + shipWidth/2, y, 5);
         } else {
-            ++bulletTime;
             return null;
         }
     }
