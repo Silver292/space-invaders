@@ -12,10 +12,11 @@ ArrayList<Bullet> bullets;
 Invader enemy;
 Invader[][] enemyArray;
 Button startButton, endButton;
-public static int enemiesPerRow = 10; // enemy amount per row
-public static int enemyRows = 5;
-public static int enemies; // total enemies
+int enemiesPerRow = 10; // enemy amount per row
+int enemyRows = 5;
+int enemies; // total enemies
 int gameState;
+int highscore;
 Boolean enemyReachedEnd = false;
 
 PImage background;
@@ -186,6 +187,19 @@ void drawScreen(String title, Button button){
 // Shows the players points at the end of the game
 void showPoints(Defender player) {
     int score = player.getScore();
+
+    // check for highscore
+    highscore = score > highscore ? score : highscore;
+
+    textAlign(CENTER);
+    textSize(32);
+    fill(255);
+    text("HIGHSCORE", width/2, height/4);
+
+    textAlign(CENTER);
+    textSize(32);
+    fill(255);
+    text(highscore, width/2, height/4 + 50);
 
     textAlign(CENTER);
     textSize(32);
