@@ -23,7 +23,7 @@ public class Defender extends Ship {
 		xDirection = direction;
 	}
 	
-	public Boolean canShoot() {
+	public boolean canShoot() {
 		return (parent.millis() - shotTime) > shotDelay;
 	}
 	
@@ -52,4 +52,5 @@ public class Defender extends Ship {
     void getHit() {
         --lives;
     }
+
 }// end class
