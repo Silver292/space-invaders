@@ -15,6 +15,14 @@ public class Defender extends Ship {
 		super(x, y, speed, image, p);
 	} // end constructor
 
+	public int getXDirection() {
+		return xDirection;
+	}
+	
+	public void setXDirection(int direction) {
+		xDirection = direction;
+	}
+	
 	public Boolean canShoot() {
 		return (parent.millis() - shotTime) > shotDelay;
 	}

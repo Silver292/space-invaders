@@ -156,9 +156,9 @@ public class SpaceInvaders extends PApplet {
         if (key == CODED)
         {
             if (keyCode == LEFT){
-                player.xDirection = 0;
+                player.setXDirection(0);
             } else if (keyCode == RIGHT){
-                player.xDirection = 0;
+            	player.setXDirection(0);
             }
         }
     }
@@ -167,9 +167,9 @@ public class SpaceInvaders extends PApplet {
         if (key == CODED)
         {
             if (keyCode == LEFT){
-                player.xDirection = -1;
+            	player.setXDirection(-1);
             } else if (keyCode == RIGHT){
-                player.xDirection = 1;
+            	player.setXDirection(1);
             }
         }
         if (key == ' ' ){
