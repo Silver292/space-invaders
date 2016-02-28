@@ -4,6 +4,12 @@ import processing.core.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+//TODO: Limit player bullets
+//TODO: Add gem end when enemy reaches end
+//TODO: Add sound
+//TODO: Add shields
+
+
 public class SpaceInvaders extends PApplet {
 
     // Run this project as Java application and this
@@ -11,7 +17,7 @@ public class SpaceInvaders extends PApplet {
     public static void main(String[] args) {
     	PApplet.main(SpaceInvaders.class.getName());
     }
-	
+
     // Game constants
     final int TITLE_SCREEN = 0;
     final int GAME_PLAYING = 1;
@@ -32,11 +38,11 @@ public class SpaceInvaders extends PApplet {
     Boolean enemyReachedEnd = false;
 
     PImage background;
-   
+
     public void settings() {
     	  size(565, 600);
     	}
-    
+
     public void setup() {
 
         gameState = TITLE_SCREEN;
@@ -134,7 +140,7 @@ public class SpaceInvaders extends PApplet {
                 }
 
 
-                // create enemies to fill array TODO: Fix spacing number to use width of enemy
+                // create enemies to fill array
                 enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, points, imageOne, imageTwo, this);
             }
 
