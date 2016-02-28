@@ -173,7 +173,8 @@ public class SpaceInvaders extends PApplet {
             }
         }
         if (key == ' ' ){
-            bullets.add(player.shoot());
+        	if(player.canShoot())
+        		bullets.add(player.shoot());
         }
 
     }
