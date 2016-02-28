@@ -4,8 +4,6 @@ import processing.core.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-//TODO: Limit player bullets
-//TODO: Add gem end when enemy reaches end
 //TODO: Add sound
 //TODO: Add shields
 
