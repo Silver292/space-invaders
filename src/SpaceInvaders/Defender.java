@@ -18,19 +18,19 @@ public class Defender extends Ship {
 	public int getXDirection() {
 		return xDirection;
 	}
-	
+
 	public void setXDirection(int direction) {
 		xDirection = direction;
 	}
-	
+
 	public boolean canShoot() {
 		return (parent.millis() - shotTime) > shotDelay;
 	}
-	
+
 	Bullet shoot()
 	{
 		shotTime = parent.millis();
-		return new Bullet(x + shipWidth/2, y, 5, parent);
+		return new Bullet(x + width/2, y, 5, parent);
 	}
 
 	void addPoints(int points)

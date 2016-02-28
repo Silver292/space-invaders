@@ -25,7 +25,7 @@ public class Invader extends Ship {
         bulletTime = rand.nextInt(bulletTimeMax);
     } // end constructor
 
-	public Invader (int x, int y, int speed, int points, String image1, 
+	public Invader (int x, int y, int speed, int points, String image1,
 			String image2, PApplet p)
 	{
 		super(x, y, speed, image1, p);
@@ -74,7 +74,7 @@ public class Invader extends Ship {
     Bullet shoot() {
         if(rand.nextDouble() < 0.05 && ++bulletTime >= bulletTimeMax){
             bulletTime = 0;
-            return new EnemyBullet(x + shipWidth/2, y, 5, parent);
+            return new EnemyBullet(x + width/2, y, 5, parent);
         } else {
             return null;
         }
@@ -87,7 +87,7 @@ public class Invader extends Ship {
 
 	// moves in the invader down the screen
 	void moveY() {
-		y = y + shipHeight;
+		y = y + height;
 	}
 
     // returns the invaders points

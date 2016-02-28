@@ -2,7 +2,7 @@ package SpaceInvaders;
 import processing.core.PApplet;
 
 public class GameObject  {
-	int x, y, speed;
+	int x, y, speed, width, height;
 	boolean destroyed = false;
 	PApplet parent;
 
@@ -22,6 +22,12 @@ public class GameObject  {
 		render();
 	} // end update()
 
+	boolean hasCollided(Ship ship)
+	{
+	    return (x <= ship.x + ship.width && x + width >= ship.x &&
+	            y <= ship.y + ship.height && y + height >= ship.y);
+	}// end hasCollided
+	
 	void move(){};
 
 	void render(){};

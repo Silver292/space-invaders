@@ -5,23 +5,21 @@ import processing.core.PImage;
 
 public class Ship extends GameObject {
 	int xDirection;
-	int shipWidth;
-	int shipHeight;
     PImage sprite;
 
     public Ship (int x, int y, int speed, String image, PApplet p) {
         super(x, y, speed, p);
-        
+
         sprite = parent.loadImage(image);
 
-        shipWidth = sprite.width;
-        shipHeight = sprite.height;
+        width = sprite.width;
+        height = sprite.height;
     } // end constructor
 
 	// checks the next X location and returns true
 	// if within bounds else returns false
 	boolean inXBounds(int nextX) {
-		return (nextX > 0 && nextX + shipWidth < parent.width);
+		return (nextX > 0 && nextX + width < parent.width);
 	} // end inXBounds()
 
 
@@ -48,10 +46,4 @@ public class Ship extends GameObject {
 	void render() {
 		parent.image(sprite, x, y);
 	} // end render
-	
-	boolean hasCollided(Ship ship)
-	{
-		return (x <= ship.x + ship.shipWidth && x + shipWidth >= ship.x &&
-				y <= ship.y + ship.shipHeight && shipHeight + y >= ship.y);
-	}// end hasCollided
 }
