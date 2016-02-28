@@ -53,4 +53,5 @@ public class Defender extends Ship {
         --lives;
     }
 
+
 }// end class

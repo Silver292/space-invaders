@@ -293,6 +293,11 @@ public class SpaceInvaders extends PApplet {
 
                 enemyArray[row][column].update(changeDir);
 
+                // check for collision with player
+                if (enemyArray[row][column].hasCollided(player)){
+                	gameState = GAME_OVER;
+                }
+                
                 bullet = enemyArray[row][column].shoot();
                 if(bullet != null) {
                     bullets.add(bullet);

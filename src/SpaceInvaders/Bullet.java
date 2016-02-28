@@ -30,10 +30,8 @@ public class Bullet extends GameObject{
 
 	boolean hasCollided(Ship ship)
 	{
-		int rightEdge = x + bulletWidth;
-
-		return (rightEdge >= ship.x && this.x <= ship.x + ship.shipWidth) &&
-			(this.y >= ship.y &&  this.y <= ship.y + ship.shipHeight);
+	    return (x <= ship.x + ship.shipWidth && x + bulletWidth >= ship.x &&
+	            y <= ship.y + ship.shipHeight && y +bulletHeight >= ship.y);
 	}// end hasCollided
 
 	// returns true if bullet is on screen false if not

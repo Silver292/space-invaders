@@ -5,8 +5,8 @@ import processing.core.PImage;
 
 public class Ship extends GameObject {
 	int xDirection;
-	int shipWidth = 25;
-	int shipHeight = 25;
+	int shipWidth;
+	int shipHeight;
     PImage sprite;
 
     public Ship (int x, int y, int speed, String image, PApplet p) {
@@ -48,4 +48,10 @@ public class Ship extends GameObject {
 	void render() {
 		parent.image(sprite, x, y);
 	} // end render
+	
+	boolean hasCollided(Ship ship)
+	{
+		return (x <= ship.x + ship.shipWidth && x + shipWidth >= ship.x &&
+				y <= ship.y + ship.shipHeight && shipHeight + y >= ship.y);
+	}// end hasCollided
 }
