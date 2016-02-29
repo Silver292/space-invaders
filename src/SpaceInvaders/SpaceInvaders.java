@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 //TODO: Add sound
-//TODO: Add shields
-//TODO: Add levels
-
+//TODO: Better title and text
 
 public class SpaceInvaders extends PApplet {
 
@@ -36,6 +34,7 @@ public class SpaceInvaders extends PApplet {
     int enemies; // total enemies
     int gameState;
     int highscore;
+    int level = 1;
     Boolean enemyReachedEnd = false;
 
     PImage background;
@@ -55,9 +54,6 @@ public class SpaceInvaders extends PApplet {
 
         // Load background
         background = loadImage("Ship.png");
-
-        // create bullet list
-        bullets = new ArrayList<Bullet>();
     }
 
     public void draw() {
@@ -74,9 +70,7 @@ public class SpaceInvaders extends PApplet {
             break;
 
             case GAME_OVER :
-                // If there are enemies left the player must have died
-                String endMessage = enemies <= 0 ? "Congratulations!" : "Game Over";
-                drawScreen(endMessage, endButton);
+                drawScreen("Game Over", endButton);
             break;
         }
 
@@ -84,12 +78,21 @@ public class SpaceInvaders extends PApplet {
 
     // Game setup
     void gameInit(){
+        // create bullet list
+        bullets = new ArrayList<Bullet>();
+    	
+        // create shields
     	shieldArray = new Shield[shieldAmount];
     	initShields();
     	
+    	// create enemies
         enemyArray = new Invader[enemyRows][enemiesPerRow];
         initEnemies();
-        player = new Defender(250, 532, 5, "Defender.png", this);
+        
+        // create player if not already initialised
+        if (player == null) {
+        	player = new Defender(250, 532, 5, "Defender.png", this);
+        }
         enemies = enemyRows * enemiesPerRow;
     }
 
@@ -111,6 +114,8 @@ public class SpaceInvaders extends PApplet {
         
         updateShields();
 
+        nextLevel();
+        
         // check for game end conditions
         checkGameOver();
     }
@@ -133,7 +138,7 @@ public class SpaceInvaders extends PApplet {
     // Enemy creation
     void initEnemies() {
         // row var
-        int rowHeight = 60;
+        int rowHeight = 60 + (20 * level);
         int points;
         String imageOne, imageTwo;
 
@@ -258,8 +263,6 @@ public class SpaceInvaders extends PApplet {
     void drawBackground() {
         background(0);
         image(background, 0, 560);
-
-
     }
 
     // Displays player lives and score
@@ -280,9 +283,19 @@ public class SpaceInvaders extends PApplet {
 
     }
 
+    public void nextLevel() {
+    	if (enemies > 0 || player.getLives() <= 0) {
+    		return;
+    	}
+    	
+    	level++;
+    	
+    	gameInit();
+    }
+    
     // Checks for game ending changes
     void checkGameOver() {
-        if (enemies <= 0 || player.lives <=0 || enemyReachedEnd){
+        if (enemies <= 0 || player.getLives() <= 0 || enemyReachedEnd){
             gameState = GAME_OVER;
         }
     }

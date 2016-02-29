@@ -10,7 +10,7 @@ public class Invader extends Ship {
     int animCounter = 1;
     int points = 10;
     int bulletTime = 0;
-    int bulletTimeMax = 250;
+    int bulletTimeMax = 200;
     Random rand;
 
     public Invader (int x, int y, int points, String image1, String image2, PApplet p)
