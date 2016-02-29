@@ -16,28 +16,26 @@ public class SpaceInvaders extends PApplet {
     }
 
     // Game constants
-    final int TITLE_SCREEN = 0;
-    final int GAME_PLAYING = 1;
-    final int GAME_OVER    = 2;
+    private final int TITLE_SCREEN = 0;
+    private final int GAME_PLAYING = 1;
+    private final int GAME_OVER    = 2;
 
     // Game Vars
-    Defender player;
-    Bullet bullet;
-    ArrayList<Bullet> bullets;
-    Invader enemy;
-    Shield[] shieldArray;
-    int shieldAmount = 4;
-    Invader[][] enemyArray;
-    Button startButton, endButton;
-    int enemiesPerRow = 10; // enemy amount per row
-    int enemyRows = 5;
-    int enemies; // total enemies
-    int gameState;
-    int highscore;
-    int level = 1;
-    Boolean enemyReachedEnd = false;
+    private Defender player;
+    private ArrayList<Bullet> bullets;
+    private Shield[] shieldArray;
+    private int shieldAmount = 4;
+    private Invader[][] enemyArray;
+    private Button startButton, endButton;
+    private int enemiesPerRow = 10; // enemy amount per row
+    private int enemyRows = 5;
+    private int enemies; // total enemies
+    private int gameState;
+    private int highscore;
+    private int level = 1;
+    private Boolean enemyReachedEnd = false;
 
-    PImage background;
+    private PImage background;
 
     public void settings() {
     	  size(565, 600);
@@ -331,7 +329,7 @@ public class SpaceInvaders extends PApplet {
                 	gameState = GAME_OVER;
                 }
                 
-                bullet = enemyArray[row][column].shoot();
+                Bullet bullet = enemyArray[row][column].shoot();
                 if(bullet != null) {
                     bullets.add(bullet);
                 }
