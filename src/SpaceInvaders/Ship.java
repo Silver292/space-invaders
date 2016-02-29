@@ -4,8 +4,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Ship extends GameObject {
-	int xDirection;
-    PImage sprite;
+	protected int xDirection;
+	protected PImage sprite;
 
     public Ship (int x, int y, int speed, String image, PApplet p) {
         super(x, y, speed, p);
@@ -18,22 +18,22 @@ public class Ship extends GameObject {
 
 	// checks the next X location and returns true
 	// if within bounds else returns false
-	boolean inXBounds(int nextX) {
+    public boolean inXBounds(int nextX) {
 		return (nextX > 0 && nextX + width < parent.width);
 	} // end inXBounds()
 
 
 	// returns the next x coord
-	int getNextX() {
+    public int getNextX() {
 		return x + (xDirection * speed);
 	}
 
 	// returns true if the next x location will hot the edge of the screen
-	boolean hitsEdge(){
+    public boolean hitsEdge(){
 		return !inXBounds(getNextX());
 	}
 
-	void move() {
+    public void move() {
 		// get next location
 		int nextX = getNextX();
 
@@ -43,7 +43,7 @@ public class Ship extends GameObject {
 		}
 	} // end move()
 
-	void render() {
+    public void render() {
 		parent.image(sprite, x, y);
 	} // end render
 }

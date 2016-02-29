@@ -9,7 +9,7 @@ public class Bullet extends GameObject{
 	final int ENEMY = 0;
 	final int PLAYER = 1;
 
-	Bullet(int x, int y, int speed, PApplet p) {
+	public Bullet(int x, int y, int speed, PApplet p) {
 		super(x, y, speed, p);
 		colour = parent.color(26, 100, 255);
 		bulletType = PLAYER;
@@ -18,11 +18,11 @@ public class Bullet extends GameObject{
 	} // end constructor
 
 	// bullet movement
-	void move() {
+	public void move() {
 		y -= speed;
 	} // end move
 
-	void render() {
+	public void render() {
 		parent.stroke(0);
 		parent.fill(colour);
 		parent.rect(x, y, width, height);
@@ -35,7 +35,7 @@ public class Bullet extends GameObject{
 	}// end onScreen
 
 	// returns bulletType
-	int getBulletType(){
+	public int getBulletType(){
 		return bulletType;
 	}
 }

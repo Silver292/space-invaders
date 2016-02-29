@@ -4,10 +4,10 @@ import processing.core.PApplet;
 
 public class Defender extends Ship {
 
-    int score = 0;
-    int lives = 3;
-    int shotDelay = 500;
-    int shotTime = 0;
+    private int score = 0;
+    private int lives = 3;
+    private int shotDelay = 500;
+    private int shotTime = 0;
 
 	public Defender (int x, int y, int speed,
 	 String image, PApplet p)
@@ -27,29 +27,29 @@ public class Defender extends Ship {
 		return (parent.millis() - shotTime) > shotDelay;
 	}
 
-	Bullet shoot()
+	public Bullet shoot()
 	{
 		shotTime = parent.millis();
 		return new Bullet(x + width/2, y, 5, parent);
 	}
 
-	void addPoints(int points)
+	public void addPoints(int points)
 	{
 		score += points;
 	}
 
     // returns current score
-    int getScore() {
+	public int getScore() {
         return score;
     }
 
     // returns lives
-    int getLives() {
+	public int getLives() {
         return lives;
     }
 
     // reduces player lives
-    void getHit() {
+	public void getHit() {
         --lives;
     }
 

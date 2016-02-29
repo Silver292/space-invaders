@@ -77,7 +77,7 @@ public class SpaceInvaders extends PApplet {
     }
 
     // Game setup
-    void gameInit(){
+    public void gameInit(){
         // create bullet list
         bullets = new ArrayList<Bullet>();
     	
@@ -97,7 +97,7 @@ public class SpaceInvaders extends PApplet {
     }
 
 	// Main game loop
-    void playGame() {
+    public void playGame() {
         drawBackground();
 
         showUI(player);
@@ -136,7 +136,7 @@ public class SpaceInvaders extends PApplet {
 	}
 
     // Enemy creation
-    void initEnemies() {
+    public void initEnemies() {
         // row var
         int rowHeight = 60 + (20 * level);
         int points;
@@ -216,7 +216,7 @@ public class SpaceInvaders extends PApplet {
     }
 
     // Draws a screen with a title and a button
-    void drawScreen(String title, Button button){
+    public void drawScreen(String title, Button button){
         background(0);
         textAlign(CENTER);
         textSize(32);
@@ -232,7 +232,7 @@ public class SpaceInvaders extends PApplet {
     }
 
     // Shows the players points at the end of the game
-    void showPoints(Defender player) {
+    public void showPoints(Defender player) {
         int score = player.getScore();
 
         // check for highscore
@@ -260,13 +260,13 @@ public class SpaceInvaders extends PApplet {
     }
 
     // draws the background
-    void drawBackground() {
+    public void drawBackground() {
         background(0);
         image(background, 0, 560);
     }
 
     // Displays player lives and score
-    void showUI(Defender player) {
+    public void showUI(Defender player) {
 
         // Show score
         textAlign(CENTER);
@@ -294,13 +294,13 @@ public class SpaceInvaders extends PApplet {
     }
     
     // Checks for game ending changes
-    void checkGameOver() {
+    public void checkGameOver() {
         if (enemies <= 0 || player.getLives() <= 0 || enemyReachedEnd){
             gameState = GAME_OVER;
         }
     }
 
-    boolean checkEnemyBoundaries() {
+    public boolean checkEnemyBoundaries() {
         // check if any enemies have hit the boundary
         for (int row = 0; row < enemyArray.length; ++row)
         {
@@ -315,7 +315,7 @@ public class SpaceInvaders extends PApplet {
         return false;
     }
 
-    void updateEnemies(boolean changeDir) {
+    public void updateEnemies(boolean changeDir) {
         // call update on all enemies in array
         for (int row = 0; row < enemyArray.length; ++row) {
             for (int column = 0; column < enemyArray[row].length; ++column) {
@@ -339,7 +339,7 @@ public class SpaceInvaders extends PApplet {
         }
     }
 
-    void updateBullets(){
+    public void updateBullets(){
         // check there are bullets
         if(bullets.isEmpty()){
             return;

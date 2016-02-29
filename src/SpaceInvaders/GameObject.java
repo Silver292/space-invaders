@@ -2,9 +2,11 @@ package SpaceInvaders;
 import processing.core.PApplet;
 
 public class GameObject  {
-	int x, y, speed, width, height;
-	boolean destroyed = false;
-	PApplet parent;
+	protected int x, y, speed;
+	protected int width;
+	protected int height;
+	protected boolean destroyed = false;
+	protected PApplet parent;
 
 	public GameObject (int x, int y, int speed, PApplet p) {
 		this.x = x;
@@ -13,7 +15,7 @@ public class GameObject  {
 		parent = p;
 	}
 
-	void update() {
+	public void update() {
 		// check object is still in play
 		if(destroyed){
 			return;
@@ -32,7 +34,7 @@ public class GameObject  {
 		destroyed = true;
 	}
 	
-	void move(){};
+	public void move(){};
 
-	void render(){};
+	public void render(){};
 }

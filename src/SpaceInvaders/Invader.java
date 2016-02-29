@@ -6,12 +6,12 @@ import processing.core.PImage;
 
 public class Invader extends Ship {
 
-    PImage sprite1, sprite2;
-    int animCounter = 1;
-    int points = 10;
-    int bulletTime = 0;
-    int bulletTimeMax = 200;
-    Random rand;
+    private PImage sprite1, sprite2;
+    private int animCounter = 1;
+    private int points = 10;
+    private int bulletTime = 0;
+    private int bulletTimeMax = 200;
+    private Random rand;
 
     public Invader (int x, int y, int points, String image1, String image2, PApplet p)
     {
@@ -39,7 +39,7 @@ public class Invader extends Ship {
 	} // end constructor
 
 	//updates invader and changes direction based on boolean passed
-	void update(boolean changeDir){
+	public void update(boolean changeDir){
         // check object is still in play
         if(destroyed){
             return;
@@ -48,7 +48,7 @@ public class Invader extends Ship {
 		render();
 	}
 
-	void move(boolean changeDir) {
+	public void move(boolean changeDir) {
 		// Slower movements speed
 		if (parent.frameCount % 40 != 0)
 			return;
@@ -71,7 +71,7 @@ public class Invader extends Ship {
         animCounter++;
 	}
 
-    Bullet shoot() {
+	public Bullet shoot() {
         if(rand.nextDouble() < 0.05 && ++bulletTime >= bulletTimeMax){
             bulletTime = 0;
             return new EnemyBullet(x + width/2, y, 5, parent);
@@ -81,17 +81,17 @@ public class Invader extends Ship {
     }
 
 	// moves the invader across the screen
-	void moveX() {
+    public void moveX() {
 		x = x + (xDirection * speed);
 	} // end move
 
 	// moves in the invader down the screen
-	void moveY() {
+    public void moveY() {
 		y = y + height;
 	}
 
     // returns the invaders points
-    int getPoints() {
+    public int getPoints() {
         return points;
     }
 }

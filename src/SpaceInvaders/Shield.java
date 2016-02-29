@@ -4,8 +4,8 @@ import processing.core.PImage;
 
 public class Shield extends Ship{
 	
-	PImage spriteHalfDamage, spriteFullDamage;
-	int health = 10;
+	private PImage spriteHalfDamage, spriteFullDamage;
+	private int health = 10;
 	
 	public Shield(int x, int y, int speed, String image, PApplet p,
 			String sprite2, String sprite3) {
