@@ -28,11 +28,12 @@ public class Ship extends GameObject {
 		return x + (xDirection * speed);
 	}
 
-	// returns true if the next x location will hot the edge of the screen
-    public boolean hitsEdge(){
+	// returns true if the next x location will hit the edge of the screen
+    public boolean hitsEdge() {
 		return !inXBounds(getNextX());
 	}
 
+    // moves the ship
     public void move() {
 		// get next location
 		int nextX = getNextX();
@@ -43,6 +44,7 @@ public class Ship extends GameObject {
 		}
 	} // end move()
 
+    // draws the sprite to the screen
     public void render() {
 		parent.image(sprite, x, y);
 	} // end render

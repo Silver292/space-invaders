@@ -70,12 +70,11 @@ public class SpaceInvaders extends PApplet {
             case GAME_OVER :
                 drawScreen("Game Over", endButton);
             break;
-        }
-
+        } // end switch
     }
 
     // Game setup
-    public void gameInit(){
+    public void gameInit() {
         // create bullet list
         bullets = new ArrayList<Bullet>();
     	
@@ -129,8 +128,7 @@ public class SpaceInvaders extends PApplet {
 			shieldArray[i] = new Shield(xPos , yPos, 0, "shield-green.png", this, "shield-amber.png", "shield-red.png");
 			
 			xPos += width/4;
-		}
-		
+		} // end for
 	}
 
     // Enemy creation
@@ -141,10 +139,8 @@ public class SpaceInvaders extends PApplet {
         String imageOne, imageTwo;
 
         // loop through array
-        for (int row = 0; row < enemyArray.length; ++row)
-        {
-            for(int column = 0; column < enemyArray[0].length; column++)
-            {
+        for (int row = 0; row < enemyArray.length; ++row) {
+            for(int column = 0; column < enemyArray[0].length; column++) {
 
                 // Assign enemy image based on row
                 if(row < 1) {
@@ -162,59 +158,56 @@ public class SpaceInvaders extends PApplet {
                     points = 10;
                 }
 
-
                 // create enemies to fill array
                 enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, points, imageOne, imageTwo, this);
-            }
+            } // end inner for
 
             // change row height
             rowHeight += 55;
-        }
+        } // end for
     }
 
 
     // Controls
 
     public void keyReleased() {
-        if (key == CODED)
-        {
-            if (keyCode == LEFT){
+        if (key == CODED) {
+            if (keyCode == LEFT) {
                 player.setXDirection(0);
-            } else if (keyCode == RIGHT){
+            } else if (keyCode == RIGHT) {
             	player.setXDirection(0);
             }
-        }
+        } // end if
     }
 
     public void keyPressed() {
-        if (key == CODED)
-        {
-            if (keyCode == LEFT){
+        if (key == CODED) {
+            if (keyCode == LEFT) {
             	player.setXDirection(-1);
-            } else if (keyCode == RIGHT){
+            } else if (keyCode == RIGHT) {
             	player.setXDirection(1);
             }
         }
-        if (key == ' ' ){
+        
+        if (key == ' ' ) {
         	if(player.canShoot())
         		bullets.add(player.shoot());
         }
-
     }
 
     // Get mouse clicks for button presses
-    public void mouseClicked(){
+    public void mouseClicked() {
 
-        if(startButton.mouseOver() && gameState == TITLE_SCREEN){
+        if(startButton.mouseOver() && gameState == TITLE_SCREEN) {
             gameState = GAME_PLAYING;
             gameInit();
-        } else if(endButton.mouseOver() && gameState == GAME_OVER){
+        } else if(endButton.mouseOver() && gameState == GAME_OVER) {
             gameState = TITLE_SCREEN;
         }
     }
 
     // Draws a screen with a title and a button
-    public void drawScreen(String title, Button button){
+    public void drawScreen(String title, Button button) {
         background(0);
         textAlign(CENTER);
         textSize(32);
@@ -235,25 +228,16 @@ public class SpaceInvaders extends PApplet {
 
         // check for highscore
         highscore = score > highscore ? score : highscore;
-
+        
         textAlign(CENTER);
         textSize(32);
         fill(255);
         text("HIGHSCORE", width/2, height/4);
 
-        textAlign(CENTER);
-        textSize(32);
-        fill(255);
         text(highscore, width/2, height/4 + 50);
-
-        textAlign(CENTER);
-        textSize(32);
-        fill(255);
+        
         text("SCORE", width/2, height/2);
 
-        textAlign(CENTER);
-        textSize(32);
-        fill(255);
         text(score, width/2, height/2 + 50);
     }
 
@@ -273,14 +257,12 @@ public class SpaceInvaders extends PApplet {
         text("SCORE: " + player.getScore(), width/4 * 3, 30);
 
         // Show lives
-        // Show score
-        textAlign(CENTER);
-        textSize(18);
-        fill(255);
         text("LIVES: " + player.getLives(), width/4, 30);
 
     }
 
+    // Checks if all enemies are destroyed
+    // if so, set up next level
     public void nextLevel() {
     	if (enemies > 0 || player.getLives() <= 0) {
     		return;
@@ -293,23 +275,23 @@ public class SpaceInvaders extends PApplet {
     
     // Checks for game ending changes
     public void checkGameOver() {
-        if (enemies <= 0 || player.getLives() <= 0 || enemyReachedEnd){
+        if (enemies <= 0 || player.getLives() <= 0 || enemyReachedEnd) {
             gameState = GAME_OVER;
         }
     }
 
     public boolean checkEnemyBoundaries() {
         // check if any enemies have hit the boundary
-        for (int row = 0; row < enemyArray.length; ++row)
-        {
-            for(int column = 0; column < enemyArray[row].length; column++)
-            {
+        for (int row = 0; row < enemyArray.length; ++row) {
+            for(int column = 0; column < enemyArray[row].length; column++) {
+            	
                 // if enemy exists and will hit the edge next
                 if (enemyArray[row][column] != null && enemyArray[row][column].hitsEdge())
                     return true;
-            }
-        }
-
+                
+            } // end inner for
+        } // end outer for
+        
         return false;
     }
 
@@ -318,6 +300,7 @@ public class SpaceInvaders extends PApplet {
         for (int row = 0; row < enemyArray.length; ++row) {
             for (int column = 0; column < enemyArray[row].length; ++column) {
 
+            	// skip dead enemies
                 if(enemyArray[row][column] == null){
                     continue;
                  }
@@ -329,48 +312,49 @@ public class SpaceInvaders extends PApplet {
                 	gameState = GAME_OVER;
                 }
                 
+                // Get bullets if shot
                 Bullet bullet = enemyArray[row][column].shoot();
                 if(bullet != null) {
                     bullets.add(bullet);
                 }
             } // end inner for
-        }
+        } // end outer for
     }
 
-    public void updateBullets(){
+    public void updateBullets() {
         // check there are bullets
-        if(bullets.isEmpty()){
+        if(bullets.isEmpty()) {
             return;
         }
 
         // update all bullets, using iterator to remove collided bullets
-        for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();)
-        {
+        for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();) {
             // Get the bullet
             Bullet bullet = iterator.next();
 
             // remove bullet if off the screen
-            if(!bullet.onScreen()){
+            if(!bullet.onScreen()) {
                 iterator.remove();
             }
 
             // check player bullets for collision with enemy
-            if(bullet.getBulletType() == 1)
-            {
+            if(bullet.getBulletType() == 1) {
 
                 // iterate over enemies to check collision
-                for (int row = 0; row < enemyArray.length; ++row)
-                {
-                    for(int column = 0; column < enemyArray[row].length; ++column)
-                    {
+                for (int row = 0; row < enemyArray.length; ++row) {
+                    for(int column = 0; column < enemyArray[row].length; ++column) {
                         // skip dead enemies
-                        if(enemyArray[row][column] == null){
+                        if(enemyArray[row][column] == null) {
                             continue;
                         }
 
                         // check for collision and remove bullet and enemy if there is one
-                        if(bullet.hasCollided(enemyArray[row][column])){
+                        if(bullet.hasCollided(enemyArray[row][column])) {
+                        	
+                        	// add points for enemy to player score
                             player.addPoints(enemyArray[row][column].getPoints());
+                            
+                            // remove collided objects
                             iterator.remove();
                             enemyArray[row][column].destroy();
                             enemyArray[row][column] = null;
@@ -378,7 +362,9 @@ public class SpaceInvaders extends PApplet {
                         }
                     } // end inner inner for
                 } // end inner for
+                
             } else if(bullet.getBulletType() == 0) {
+            	
                 // check if player is hit
                 if(bullet.hasCollided(player)) {
                     player.getHit();
@@ -393,7 +379,8 @@ public class SpaceInvaders extends PApplet {
             		continue;
             	}
             	
-				if(bullet.hasCollided(shieldArray[i])){
+            	// handle bullet shield collision
+				if(bullet.hasCollided(shieldArray[i])) {
 					shieldArray[i].reduceHealth();
 					iterator.remove();
 				}
@@ -416,8 +403,7 @@ public class SpaceInvaders extends PApplet {
 			if (shieldArray[i].isDestroyed()) {
 				shieldArray[i] = null;
 			}
-		}
-		
+		} // end for
 	}
     
 }

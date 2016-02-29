@@ -10,8 +10,7 @@ public class Defender extends Ship {
     private int shotTime = 0;
 
 	public Defender (int x, int y, int speed,
-	 String image, PApplet p)
-	{
+	 String image, PApplet p) {
 		super(x, y, speed, image, p);
 	} // end constructor
 
@@ -27,14 +26,12 @@ public class Defender extends Ship {
 		return (parent.millis() - shotTime) > shotDelay;
 	}
 
-	public Bullet shoot()
-	{
+	public Bullet shoot() {
 		shotTime = parent.millis();
 		return new Bullet(x + width/2, y, 5, parent);
 	}
 
-	public void addPoints(int points)
-	{
+	public void addPoints(int points) {
 		score += points;
 	}
 
@@ -52,6 +49,5 @@ public class Defender extends Ship {
 	public void getHit() {
         --lives;
     }
-
 
 }// end class

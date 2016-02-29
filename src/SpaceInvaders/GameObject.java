@@ -24,8 +24,9 @@ public class GameObject  {
 		render();
 	} // end update()
 
-	boolean hasCollided(Ship ship)
-	{
+	// Checks for collisions with ships,
+	// returns true if collision has occurred
+	boolean hasCollided(Ship ship) {
 	    return (x <= ship.x + ship.width && x + width >= ship.x &&
 	            y <= ship.y + ship.height && y + height >= ship.y);
 	}// end hasCollided

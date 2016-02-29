@@ -13,8 +13,8 @@ public class Invader extends Ship {
     private int bulletTimeMax = 200;
     private Random rand;
 
-    public Invader (int x, int y, int points, String image1, String image2, PApplet p)
-    {
+    public Invader (int x, int y, int points, String image1, 
+    		String image2, PApplet p) {
         super(x, y, 8, image1, p);
 
         sprite1 = sprite;
@@ -26,8 +26,7 @@ public class Invader extends Ship {
     } // end constructor
 
 	public Invader (int x, int y, int speed, int points, String image1,
-			String image2, PApplet p)
-	{
+			String image2, PApplet p) {
 		super(x, y, speed, image1, p);
 
         sprite1 = sprite;
@@ -39,7 +38,7 @@ public class Invader extends Ship {
 	} // end constructor
 
 	//updates invader and changes direction based on boolean passed
-	public void update(boolean changeDir){
+	public void update(boolean changeDir) {
         // check object is still in play
         if(destroyed){
             return;
@@ -53,7 +52,7 @@ public class Invader extends Ship {
 		if (parent.frameCount % 40 != 0)
 			return;
 
-		// if changeDir
+		// Move down and change direction
 		if (changeDir) {
 			moveY();
 			xDirection = -xDirection;
@@ -61,6 +60,7 @@ public class Invader extends Ship {
 			moveX();
 		}
 
+		// alternate images
         if (animCounter >= 1) {
             sprite = sprite2;
             animCounter = 0;
@@ -71,8 +71,12 @@ public class Invader extends Ship {
         animCounter++;
 	}
 
+	// Shoot bullets randomly
+	// returns null if a bullet is not shot
 	public Bullet shoot() {
-        if(rand.nextDouble() < 0.05 && ++bulletTime >= bulletTimeMax){
+		
+		// random chance and set time period between shots
+        if(rand.nextDouble() < 0.05 && ++bulletTime >= bulletTimeMax) {
             bulletTime = 0;
             return new EnemyBullet(x + width/2, y, 5, parent);
         } else {

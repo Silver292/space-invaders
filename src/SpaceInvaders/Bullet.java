@@ -1,7 +1,7 @@
 package SpaceInvaders;
 import processing.core.PApplet;
 
-public class Bullet extends GameObject{
+public class Bullet extends GameObject {
 	int colour;
 	boolean inGame = true;
 	int bulletType;
@@ -29,13 +29,13 @@ public class Bullet extends GameObject{
 	} // end render
 
 	// returns true if bullet is on screen false if not
-	boolean onScreen(){
+	boolean onScreen() {
 		// check for the bottom of the bullet
 		return (x + height >= 0 || x < parent.height);
 	}// end onScreen
 
 	// returns bulletType
-	public int getBulletType(){
+	public int getBulletType() {
 		return bulletType;
 	}
 }
