@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 //TODO: Add sound
 //TODO: Add shields
+//TODO: Add levels
 
 
 public class SpaceInvaders extends PApplet {
@@ -26,6 +27,8 @@ public class SpaceInvaders extends PApplet {
     Bullet bullet;
     ArrayList<Bullet> bullets;
     Invader enemy;
+    Shield[] shieldArray;
+    int shieldAmount = 4;
     Invader[][] enemyArray;
     Button startButton, endButton;
     int enemiesPerRow = 10; // enemy amount per row
@@ -81,14 +84,16 @@ public class SpaceInvaders extends PApplet {
 
     // Game setup
     void gameInit(){
+    	shieldArray = new Shield[shieldAmount];
+    	initShields();
+    	
         enemyArray = new Invader[enemyRows][enemiesPerRow];
         initEnemies();
         player = new Defender(250, 532, 5, "Defender.png", this);
         enemies = enemyRows * enemiesPerRow;
     }
 
-
-    // Main game loop
+	// Main game loop
     void playGame() {
         drawBackground();
 
@@ -97,16 +102,33 @@ public class SpaceInvaders extends PApplet {
         player.update();
 
         updateBullets();
-
+        
         boolean changeDir = false;
 
         changeDir = checkEnemyBoundaries();
 
         updateEnemies(changeDir);
+        
+        updateShields();
 
         // check for game end conditions
         checkGameOver();
     }
+
+	// initialises shields
+    private void initShields() {
+		
+    	int xPos = 40;
+    	int yPos = 480;
+    	
+    	// fill shieldArray
+    	for (int i = 0; i < shieldArray.length; i++) {
+			shieldArray[i] = new Shield(xPos , yPos, 0, "shield-green.png", this, "shield-amber.png", "shield-red.png");
+			
+			xPos += width/4;
+		}
+		
+	}
 
     // Enemy creation
     void initEnemies() {
@@ -355,4 +377,12 @@ public class SpaceInvaders extends PApplet {
             bullet.update();
         }// end bullet for
     } // end method
+    
+    private void updateShields() {
+		for (int i = 0; i < shieldArray.length; i++) {
+			shieldArray[i].update();
+		}
+		
+	}
+    
 }
