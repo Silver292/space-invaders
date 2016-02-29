@@ -20,15 +20,15 @@ public class SpaceInvaders extends PApplet {
     private ArrayList<Bullet> bullets;
     private Shield[] shieldArray;
     private int shieldAmount = 4;
-    private Invader[][] enemyArray;
     private Button startButton, endButton;
-    private int enemiesPerRow = 10; // enemy amount per row
-    private int enemyRows = 5;
-    private int enemies; // total enemies
+//    private int enemiesPerRow = 10; // enemy amount per row
+//    private int enemyRows = 5;
+//    private int enemies; // total enemies
+    private EnemyGroup enemies;
     private GameState gameState;
     private int highscore;
     private int level = 1;
-    private Boolean enemyReachedEnd = false;
+    //private Boolean enemyReachedEnd = false;
 
     private PImage background;
 
@@ -78,14 +78,16 @@ public class SpaceInvaders extends PApplet {
     	initShields();
     	
     	// create enemies
-        enemyArray = new Invader[enemyRows][enemiesPerRow];
-        initEnemies();
+//        enemyArray = new Invader[enemyRows][enemiesPerRow];
+//        initEnemies();
+    	enemies = new EnemyGroup(5, 10, this);
+    	enemies.init(level);
         
         // create player if not already initialised
         if (player == null) {
         	player = new Defender(250, 532, 5, "Defender.png", this);
         }
-        enemies = enemyRows * enemiesPerRow;
+//        enemies = enemyRows * enemiesPerRow;
     }
 
 	// Main game loop
@@ -100,9 +102,11 @@ public class SpaceInvaders extends PApplet {
         
         boolean changeDir = false;
 
-        changeDir = checkEnemyBoundaries();
-
-        updateEnemies(changeDir);
+//        changeDir = checkEnemyBoundaries();
+//
+//        updateEnemies(changeDir);
+        
+        enemies.updateEnemies(player, bullets);
         
         updateShields();
 
@@ -126,41 +130,41 @@ public class SpaceInvaders extends PApplet {
 		} // end for
 	}
 
-    // Enemy creation
-    public void initEnemies() {
-        // row var
-        int rowHeight = 60 + (20 * level);
-        int points;
-        String imageOne, imageTwo;
-
-        // loop through array
-        for (int row = 0; row < enemyArray.length; ++row) {
-            for(int column = 0; column < enemyArray[0].length; column++) {
-
-                // Assign enemy image based on row
-                if(row < 1) {
-                    imageOne = "squid1.png";
-                    imageTwo = "squid2.png";
-                    points = 30;
-
-                } else if (row < 3) {
-                    imageOne = "crab1.png";
-                    imageTwo = "crab2.png";
-                    points = 20;
-                } else {
-                    imageOne = "skull1.png";
-                    imageTwo = "skull2.png";
-                    points = 10;
-                }
-
-                // create enemies to fill array
-                enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, points, imageOne, imageTwo, this);
-            } // end inner for
-
-            // change row height
-            rowHeight += 55;
-        } // end for
-    }
+//    // Enemy creation
+//    public void initEnemies() {
+//        // row var
+//        int rowHeight = 60 + (20 * level);
+//        int points;
+//        String imageOne, imageTwo;
+//
+//        // loop through array
+//        for (int row = 0; row < enemyArray.length; ++row) {
+//            for(int column = 0; column < enemyArray[0].length; column++) {
+//
+//                // Assign enemy image based on row
+//                if(row < 1) {
+//                    imageOne = "squid1.png";
+//                    imageTwo = "squid2.png";
+//                    points = 30;
+//
+//                } else if (row < 3) {
+//                    imageOne = "crab1.png";
+//                    imageTwo = "crab2.png";
+//                    points = 20;
+//                } else {
+//                    imageOne = "skull1.png";
+//                    imageTwo = "skull2.png";
+//                    points = 10;
+//                }
+//
+//                // create enemies to fill array
+//                enemyArray[row][column] = new Invader(column * 35 + width/4, rowHeight, points, imageOne, imageTwo, this);
+//            } // end inner for
+//
+//            // change row height
+//            rowHeight += 55;
+//        } // end for
+//    }
 
 
     // Controls
@@ -259,7 +263,7 @@ public class SpaceInvaders extends PApplet {
     // Checks if all enemies are destroyed
     // if so, set up next level
     public void nextLevel() {
-    	if (enemies > 0 || player.getLives() <= 0) {
+    	if (enemies.getAmount() > 0 || player.getLives() <= 0) {
     		return;
     	}
     	
@@ -270,52 +274,52 @@ public class SpaceInvaders extends PApplet {
     
     // Checks for game ending changes
     public void checkGameOver() {
-        if (enemies <= 0 || player.getLives() <= 0 || enemyReachedEnd) {
+        if (enemies.hasGameOverState() || player.getLives() <= 0 ) {
             gameState = GameState.GAME_OVER;
         }
     }
 
-    // Returns true if any enemy has hit the edge of the screen
-    public boolean checkEnemyBoundaries() {
-        // check if any enemies have hit the boundary
-        for (int row = 0; row < enemyArray.length; ++row) {
-            for(int column = 0; column < enemyArray[row].length; column++) {
-            	
-                // if enemy exists and will hit the edge next
-                if (enemyArray[row][column] != null && enemyArray[row][column].hitsEdge())
-                    return true;
-                
-            } // end inner for
-        } // end outer for
-        
-        return false;
-    }
+//    // Returns true if any enemy has hit the edge of the screen
+//    public boolean checkEnemyBoundaries() {
+//        // check if any enemies have hit the boundary
+//        for (int row = 0; row < enemyArray.length; ++row) {
+//            for(int column = 0; column < enemyArray[row].length; column++) {
+//            	
+//                // if enemy exists and will hit the edge next
+//                if (enemyArray[row][column] != null && enemyArray[row][column].hitsEdge())
+//                    return true;
+//                
+//            } // end inner for
+//        } // end outer for
+//        
+//        return false;
+//    }
 
-    public void updateEnemies(boolean changeDir) {
-        // call update on all enemies in array
-        for (int row = 0; row < enemyArray.length; ++row) {
-            for (int column = 0; column < enemyArray[row].length; ++column) {
-
-            	// skip dead enemies
-                if(enemyArray[row][column] == null){
-                    continue;
-                 }
-
-                enemyArray[row][column].update(changeDir);
-
-                // check for collision with player
-                if (enemyArray[row][column].hasCollided(player)){
-                	gameState = GameState.GAME_OVER;
-                }
-                
-                // Get bullets if shot
-                Bullet bullet = enemyArray[row][column].shoot();
-                if(bullet != null) {
-                    bullets.add(bullet);
-                }
-            } // end inner for
-        } // end outer for
-    }
+//    public void updateEnemies(boolean changeDir) {
+//        // call update on all enemies in array
+//        for (int row = 0; row < enemyArray.length; ++row) {
+//            for (int column = 0; column < enemyArray[row].length; ++column) {
+//
+//            	// skip dead enemies
+//                if(enemyArray[row][column] == null){
+//                    continue;
+//                 }
+//
+//                enemyArray[row][column].update(changeDir);
+//
+//                // check for collision with player
+//                if (enemyArray[row][column].hasCollided(player)){
+//                	gameState = GameState.GAME_OVER;
+//                }
+//                
+//                // Get bullets if shot
+//                Bullet bullet = enemyArray[row][column].shoot();
+//                if(bullet != null) {
+//                    bullets.add(bullet);
+//                }
+//            } // end inner for
+//        } // end outer for
+//    }
 
     public void updateBullets() {
         // check there are bullets
@@ -336,28 +340,10 @@ public class SpaceInvaders extends PApplet {
             // check player bullets for collision with enemy
             if(bullet.getBulletType() == 1) {
 
-                // iterate over enemies to check collision
-                for (int row = 0; row < enemyArray.length; ++row) {
-                    for(int column = 0; column < enemyArray[row].length; ++column) {
-                        // skip dead enemies
-                        if(enemyArray[row][column] == null) {
-                            continue;
-                        }
-
-                        // check for collision and remove bullet and enemy if there is one
-                        if(bullet.hasCollided(enemyArray[row][column])) {
-                        	
-                        	// add points for enemy to player score
-                            player.addPoints(enemyArray[row][column].getPoints());
-                            
-                            // remove collided objects
-                            iterator.remove();
-                            enemyArray[row][column].destroy();
-                            enemyArray[row][column] = null;
-                            enemies--;
-                        }
-                    } // end inner inner for
-                } // end inner for
+            	// remove bullet if it has hit an enemy
+            	if (enemies.playerBulletHit(player, bullet)){
+            		iterator.remove();
+            	}
                 
             } else if(bullet.getBulletType() == 0) {
             	

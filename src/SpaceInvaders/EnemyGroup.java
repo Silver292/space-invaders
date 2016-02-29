@@ -6,14 +6,14 @@ import processing.core.PApplet;
 
 public class EnemyGroup {
 	Invader[][] enemyArray;
-	int enemies;
+	int amount;
 	boolean reachedEnd = false;
 	PApplet parent;
 	boolean gameOverState = false;
 	
 	public EnemyGroup(int rows, int enemiesPerRow, PApplet p) {
 		enemyArray = new Invader[rows][enemiesPerRow];
-		enemies = rows * enemiesPerRow;
+		amount = rows * enemiesPerRow;
 		parent = p;
 	}
 	
@@ -67,7 +67,7 @@ public class EnemyGroup {
     }
     
     // Fill array
-    public void initEnemies(int level) {
+    public void init(int level) {
         // row var
         int rowHeight = 60 + (20 * level);
         int points;
@@ -100,5 +100,49 @@ public class EnemyGroup {
             // change row height
             rowHeight += 55;
         } // end for
+    }
+    
+    // Takes a player and a bullet and checks if the bullet
+    // has hit any enemies. If there is a collision points are
+    // added to player and returns true
+    public boolean playerBulletHit(Defender player, Bullet bullet) {
+    	
+        // iterate over enemies to check collision
+        for (int row = 0; row < enemyArray.length; ++row) {
+            for(int column = 0; column < enemyArray[row].length; ++column) {
+                // skip dead enemies
+                if(enemyArray[row][column] == null) {
+                    continue;
+                }
+
+                // check for collision and remove bullet and enemy if there is one
+                if(bullet.hasCollided(enemyArray[row][column])) {
+                	
+                	// add points for enemy to player score
+                    player.addPoints(enemyArray[row][column].getPoints());
+                    
+                    // remove collided objects
+                    enemyArray[row][column].destroy();
+                    enemyArray[row][column] = null;
+                    amount--;
+                    return true;
+                }
+            } // end inner inner for
+        } // end inner for
+    	
+    	return false;
+    }
+    
+    public int getAmount() {
+    	return amount;
+    }
+    
+    private void checkGameOver() {
+    	gameOverState = amount > 0 ? false : true;
+    }
+    
+    public boolean hasGameOverState() {
+    	checkGameOver();
+    	return gameOverState;
     }
 }
