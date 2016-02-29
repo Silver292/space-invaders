@@ -388,6 +388,11 @@ public class SpaceInvaders extends PApplet {
             
             // check for any bullets hitting shields
             for (int i = 0; i < shieldArray.length; i++) {
+            	// skip destroyed shields
+            	if(shieldArray[i] == null) {
+            		continue;
+            	}
+            	
 				if(bullet.hasCollided(shieldArray[i])){
 					shieldArray[i].reduceHealth();
 					iterator.remove();
@@ -400,7 +405,17 @@ public class SpaceInvaders extends PApplet {
     
     private void updateShields() {
 		for (int i = 0; i < shieldArray.length; i++) {
+			// skip destroyed shields
+			if (shieldArray[i] == null) {
+				continue;
+			}
+					
 			shieldArray[i].update();
+			
+			// remove destroyed shields
+			if (shieldArray[i].isDestroyed()) {
+				shieldArray[i] = null;
+			}
 		}
 		
 	}

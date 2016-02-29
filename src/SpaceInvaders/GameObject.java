@@ -34,6 +34,10 @@ public class GameObject  {
 		destroyed = true;
 	}
 	
+	public boolean isDestroyed() {
+		return destroyed;
+	}
+	
 	public void move(){};
 
 	public void render(){};
