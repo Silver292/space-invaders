@@ -15,11 +15,6 @@ public class SpaceInvaders extends PApplet {
     	PApplet.main(SpaceInvaders.class.getName());
     }
 
-    // Game constants
-    private final int TITLE_SCREEN = 0;
-    private final int GAME_PLAYING = 1;
-    private final int GAME_OVER    = 2;
-
     // Game Vars
     private Defender player;
     private ArrayList<Bullet> bullets;
@@ -30,7 +25,7 @@ public class SpaceInvaders extends PApplet {
     private int enemiesPerRow = 10; // enemy amount per row
     private int enemyRows = 5;
     private int enemies; // total enemies
-    private int gameState;
+    private GameState gameState;
     private int highscore;
     private int level = 1;
     private Boolean enemyReachedEnd = false;
@@ -43,7 +38,7 @@ public class SpaceInvaders extends PApplet {
 
     public void setup() {
 
-        gameState = TITLE_SCREEN;
+        gameState = GameState.TITLE_SCREEN;
         // create buttons
         startButton = new Button("START", width/2, height - 160,
             150, 80, color(0,153,51), 7, this);
@@ -198,11 +193,11 @@ public class SpaceInvaders extends PApplet {
     // Get mouse clicks for button presses
     public void mouseClicked() {
 
-        if(startButton.mouseOver() && gameState == TITLE_SCREEN) {
-            gameState = GAME_PLAYING;
+        if(startButton.mouseOver() && gameState == GameState.TITLE_SCREEN) {
+            gameState = GameState.GAME_PLAYING;
             gameInit();
-        } else if(endButton.mouseOver() && gameState == GAME_OVER) {
-            gameState = TITLE_SCREEN;
+        } else if(endButton.mouseOver() && gameState == GameState.GAME_OVER) {
+            gameState = GameState.TITLE_SCREEN;
         }
     }
 
@@ -214,7 +209,7 @@ public class SpaceInvaders extends PApplet {
         fill(255);
         text(title, width/2, 100);
 
-        if (gameState == GAME_OVER) {
+        if (gameState == GameState.GAME_OVER) {
             showPoints(player);
         }
 
@@ -276,10 +271,11 @@ public class SpaceInvaders extends PApplet {
     // Checks for game ending changes
     public void checkGameOver() {
         if (enemies <= 0 || player.getLives() <= 0 || enemyReachedEnd) {
-            gameState = GAME_OVER;
+            gameState = GameState.GAME_OVER;
         }
     }
 
+    // Returns true if any enemy has hit the edge of the screen
     public boolean checkEnemyBoundaries() {
         // check if any enemies have hit the boundary
         for (int row = 0; row < enemyArray.length; ++row) {
@@ -309,7 +305,7 @@ public class SpaceInvaders extends PApplet {
 
                 // check for collision with player
                 if (enemyArray[row][column].hasCollided(player)){
-                	gameState = GAME_OVER;
+                	gameState = GameState.GAME_OVER;
                 }
                 
                 // Get bullets if shot
