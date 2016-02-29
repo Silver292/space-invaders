@@ -361,6 +361,7 @@ public class SpaceInvaders extends PApplet {
                         if(bullet.hasCollided(enemyArray[row][column])){
                             player.addPoints(enemyArray[row][column].getPoints());
                             iterator.remove();
+                            enemyArray[row][column].destroy();
                             enemyArray[row][column] = null;
                             enemies--;
                         }
@@ -373,6 +374,14 @@ public class SpaceInvaders extends PApplet {
                     iterator.remove();
                 }
             }
+            
+            // check for any bullets hitting shields
+            for (int i = 0; i < shieldArray.length; i++) {
+				if(bullet.hasCollided(shieldArray[i])){
+					shieldArray[i].reduceHealth();
+					iterator.remove();
+				}
+			}
 
             bullet.update();
         }// end bullet for

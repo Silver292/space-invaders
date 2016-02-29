@@ -14,4 +14,35 @@ public class Shield extends Ship{
 		spriteFullDamage = parent.loadImage(sprite3);
 	}
 	
+	public void update(){
+		super.update();
+		
+		changeState();
+		
+		if (health < 1) {
+			destroy();
+		}
+	}
+	
+	public void reduceHealth() {
+		health--;
+	}
+	
+	private void changeState(){
+		switch(health) {
+			case 7:
+			case 6:
+			case 5:
+				sprite = spriteHalfDamage;
+				break;
+			case 4:
+			case 3:
+			case 2:
+			case 1:
+				sprite = spriteFullDamage;
+				break;
+				
+		}
+	}
+	
 }

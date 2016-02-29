@@ -28,6 +28,10 @@ public class GameObject  {
 	            y <= ship.y + ship.height && y + height >= ship.y);
 	}// end hasCollided
 	
+	public void destroy() {
+		destroyed = true;
+	}
+	
 	void move(){};
 
 	void render(){};
