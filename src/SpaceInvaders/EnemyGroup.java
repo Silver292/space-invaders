@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class EnemyGroup {
-	Invader[][] enemyArray;
-	int amount;
-	boolean reachedEnd = false;
-	PApplet parent;
-	boolean gameOverState = false;
+	private Invader[][] enemyArray;
+	private int amount;
+	private PApplet parent;
+	private boolean gameOverState = false;
 	
 	public EnemyGroup(int rows, int enemiesPerRow, PApplet p) {
 		enemyArray = new Invader[rows][enemiesPerRow];
@@ -133,14 +132,17 @@ public class EnemyGroup {
     	return false;
     }
     
+    // Returns amount of enemies in group
     public int getAmount() {
     	return amount;
     }
     
+    // Checks for game over state
     private void checkGameOver() {
     	gameOverState = amount > 0 ? false : true;
     }
     
+    // Returns game over state
     public boolean hasGameOverState() {
     	checkGameOver();
     	return gameOverState;
