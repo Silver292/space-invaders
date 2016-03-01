@@ -2,17 +2,13 @@ package SpaceInvaders;
 import processing.core.PApplet;
 
 public class Bullet extends GameObject {
-	int colour;
-	boolean inGame = true;
-	int bulletType;
-
-	final int ENEMY = 0;
-	final int PLAYER = 1;
+	protected int colour;
+	protected BulletType bulletType;
 
 	public Bullet(int x, int y, int speed, PApplet p) {
 		super(x, y, speed, p);
 		colour = parent.color(26, 100, 255);
-		bulletType = PLAYER;
+		bulletType = BulletType.PLAYER;
 		width = 5;
 		height = 10;
 	} // end constructor
@@ -35,7 +31,7 @@ public class Bullet extends GameObject {
 	}// end onScreen
 
 	// returns bulletType
-	public int getBulletType() {
+	public BulletType getBulletType() {
 		return bulletType;
 	}
 }

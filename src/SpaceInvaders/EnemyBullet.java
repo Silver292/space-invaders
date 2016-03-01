@@ -6,7 +6,7 @@ public class EnemyBullet extends Bullet {
 
 	public EnemyBullet(int x, int y, int speed, PApplet p) {
         super(x, y, speed, p);
-        bulletType = ENEMY;
+        bulletType = BulletType.ENEMY;
         colour = parent.color(238, 0, 0);
     }
 

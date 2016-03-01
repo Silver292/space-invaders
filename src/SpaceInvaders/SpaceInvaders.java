@@ -338,14 +338,14 @@ public class SpaceInvaders extends PApplet {
             }
 
             // check player bullets for collision with enemy
-            if(bullet.getBulletType() == 1) {
+            if(bullet.getBulletType() == BulletType.PLAYER) {
 
             	// remove bullet if it has hit an enemy
             	if (enemies.playerBulletHit(player, bullet)){
             		iterator.remove();
             	}
                 
-            } else if(bullet.getBulletType() == 0) {
+            } else if(bullet.getBulletType() == BulletType.ENEMY) {
             	
                 // check if player is hit
                 if(bullet.hasCollided(player)) {
