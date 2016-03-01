@@ -18,8 +18,7 @@ public class SpaceInvaders extends PApplet {
     // Game variables
     private Defender player;
     private ArrayList<Bullet> bullets;
-    private Shield[] shieldArray;
-    private int shieldAmount = 4;
+    private ShieldGroup shields;
     private Button startButton, endButton;
     private EnemyGroup enemies;
     private GameState gameState;
@@ -70,8 +69,8 @@ public class SpaceInvaders extends PApplet {
         bullets = new ArrayList<Bullet>();
     	
         // create shields
-    	shieldArray = new Shield[shieldAmount];
-    	initShields();
+    	shields = new ShieldGroup(4, this);
+    	shields.init();
     	
     	// create enemies
     	enemies = new EnemyGroup(5, 10, this);
@@ -95,7 +94,7 @@ public class SpaceInvaders extends PApplet {
         
         enemies.updateEnemies(player, bullets);
         
-        updateShields();
+        shields.update();
 
         nextLevel();
         
@@ -103,19 +102,7 @@ public class SpaceInvaders extends PApplet {
         checkGameOver();
     }
 
-	// initialises shields
-    private void initShields() {
-		
-    	int xPos = 40;
-    	int yPos = 480;
-    	
-    	// fill shieldArray
-    	for (int i = 0; i < shieldArray.length; i++) {
-			shieldArray[i] = new Shield(xPos , yPos, 0, "shield-green.png", this, "shield-amber.png", "shield-red.png");
-			
-			xPos += width/4;
-		} // end for
-	}
+
 
     // Controls
 
@@ -262,38 +249,13 @@ public class SpaceInvaders extends PApplet {
                 }
             }
             
-            // check for any bullets hitting shields
-            for (int i = 0; i < shieldArray.length; i++) {
-            	// skip destroyed shields
-            	if(shieldArray[i] == null) {
-            		continue;
-            	}
-            	
-            	// handle bullet shield collision
-				if(bullet.hasCollided(shieldArray[i])) {
-					shieldArray[i].reduceHealth();
-					iterator.remove();
-				}
-			}
+            // Checks for bullets hitting shields
+            if (shields.hit(bullet)){
+            	iterator.remove();
+            }
 
             bullet.update();
         }// end bullet for
     } // end method
-    
-    private void updateShields() {
-		for (int i = 0; i < shieldArray.length; i++) {
-			// skip destroyed shields
-			if (shieldArray[i] == null) {
-				continue;
-			}
-					
-			shieldArray[i].update();
-			
-			// remove destroyed shields
-			if (shieldArray[i].isDestroyed()) {
-				shieldArray[i] = null;
-			}
-		} // end for
-	}
     
 }
