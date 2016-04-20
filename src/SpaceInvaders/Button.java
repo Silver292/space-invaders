@@ -1,6 +1,7 @@
 package SpaceInvaders;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.core.PFont;
 
 public class Button {
 
@@ -63,7 +64,9 @@ public class Button {
 
 		// Button text
 		parent.textAlign(PConstants.CENTER, PConstants.CENTER);
-		parent.textSize(22);
+    	PFont ca;
+        ca = parent.createFont("ca.ttf", 16);
+        parent.textFont(ca);
 		parent.fill(0);
 		parent.text(buttonText, x, y);
 

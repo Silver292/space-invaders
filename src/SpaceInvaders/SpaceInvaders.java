@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 //TODO: Add sound
-//TODO: Better title and text
 
 public class SpaceInvaders extends PApplet {
 
@@ -37,7 +36,7 @@ public class SpaceInvaders extends PApplet {
         // create buttons
         startButton = new Button("START", width/2, height - 160,
             150, 80, color(0,153,51), 7, this);
-        endButton = new Button("Return to title", width/2, height - 160,
+        endButton = new Button("Title screen", width/2, height - 160,
             150, 80, color(0,153,51), 7, this);
 
         // Load background
@@ -146,7 +145,12 @@ public class SpaceInvaders extends PApplet {
     public void drawScreen(String title, Button button) {
         background(0);
         textAlign(CENTER);
-        textSize(32);
+        
+        // load the font
+    	PFont ca;
+        ca = createFont("ca.ttf", 32);
+        textFont(ca);
+        
         fill(255);
         text(title, width/2, 100);
 
@@ -166,7 +170,9 @@ public class SpaceInvaders extends PApplet {
         highscore = score > highscore ? score : highscore;
         
         textAlign(CENTER);
-        textSize(32);
+    	PFont ca;
+        ca = createFont("ca.ttf", 32);
+        textFont(ca);
         fill(255);
         text("HIGHSCORE", width/2, height/4);
 
@@ -188,7 +194,9 @@ public class SpaceInvaders extends PApplet {
 
         // Show score
         textAlign(CENTER);
-        textSize(18);
+    	PFont ca;
+        ca = createFont("ca.ttf", 18);
+        textFont(ca);
         fill(255);
         text("SCORE: " + player.getScore(), width/4 * 3, 30);
 
