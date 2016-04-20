@@ -77,8 +77,8 @@ public class SpaceInvaders extends PApplet {
     	enemies = new EnemyGroup(5, 10, this);
     	enemies.init(level);
         
-        // create player if not already initialised
-        if (player == null) {
+        // create player on first level
+        if (level == 1) {
         	player = new Defender(250, 532, 5, "Defender.png", this);
         }
     }
@@ -214,6 +214,7 @@ public class SpaceInvaders extends PApplet {
     public void checkGameOver() {
         if (enemies.hasGameOverState() || player.getLives() <= 0 ) {
             gameState = GameState.GAME_OVER;
+            level = 1;
         }
     }
     
