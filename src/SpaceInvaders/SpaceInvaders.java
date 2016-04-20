@@ -1,10 +1,14 @@
 package SpaceInvaders;
+
 import processing.core.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-//TODO: Add sound
+import kuusisto.tinysound.*;
+
+
+// TODO: Is there a memory leak?
 
 public class SpaceInvaders extends PApplet {
 
@@ -23,6 +27,7 @@ public class SpaceInvaders extends PApplet {
     private GameState gameState;
     private int highscore;
     private int level = 1;
+    private Music bgMusic;
 
     private PImage background;
 
@@ -41,6 +46,13 @@ public class SpaceInvaders extends PApplet {
 
         // Load background
         background = loadImage("Ship.png");
+        
+        // Load background music
+        TinySound.init();
+        TinySound.setGlobalVolume(0.7);
+        bgMusic = TinySound.loadMusic("bgMusic.wav");
+        bgMusic.setVolume(0.5);
+        bgMusic.play(true);
     }
 
     public void draw() {
@@ -62,6 +74,10 @@ public class SpaceInvaders extends PApplet {
         } // end switch
     }
 
+    public void stop() {
+    	TinySound.shutdown();
+    }
+    
     // Game setup
     public void gameInit() {
         // create bullet list

@@ -1,15 +1,19 @@
 package SpaceInvaders;
 
+import kuusisto.tinysound.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Ship extends GameObject {
 	protected int xDirection;
 	protected PImage sprite;
+	protected Sound shoot, hit;
 
     public Ship (int x, int y, int speed, String image, PApplet p) {
         super(x, y, speed, p);
-
+        shoot = TinySound.loadSound("enemyShoot.wav");
+        hit = TinySound.loadSound("enemyHit.wav");
+        
         sprite = parent.loadImage(image);
 
         width = sprite.width;
@@ -48,4 +52,10 @@ public class Ship extends GameObject {
     public void render() {
 		parent.image(sprite, x, y);
 	} // end render
+    
+    // unloads sound files from memory
+	protected void unloadSounds() {
+		shoot.unload();
+		hit.unload();
+	}
 }

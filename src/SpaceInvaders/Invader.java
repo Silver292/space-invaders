@@ -1,6 +1,6 @@
 package SpaceInvaders;
-import java.util.Random;
 
+import java.util.Random;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -78,6 +78,7 @@ public class Invader extends Ship {
 		// random chance and set time period between shots
         if(rand.nextDouble() < 0.05 && ++bulletTime >= bulletTimeMax) {
             bulletTime = 0;
+            shoot.play(0.3);
             return new EnemyBullet(x + width/2, y, 5, parent);
         } else {
             return null;
@@ -98,4 +99,13 @@ public class Invader extends Ship {
     public int getPoints() {
         return points;
     }
+    
+    // used when enemy is hit by a bullet
+    public void beenHit() {
+    	destroy();
+    	hit.play(0.3);  //TODO: find out why this sound does not play
+    	unloadSounds();
+    }
+
+
 }

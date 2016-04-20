@@ -121,7 +121,7 @@ public class EnemyGroup {
                     player.addPoints(enemyArray[row][column].getPoints());
                     
                     // remove collided objects
-                    enemyArray[row][column].destroy();
+                    enemyArray[row][column].beenHit();
                     enemyArray[row][column] = null;
                     amount--;
                     return true;

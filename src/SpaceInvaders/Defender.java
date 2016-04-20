@@ -1,5 +1,6 @@
 package SpaceInvaders;
 
+import kuusisto.tinysound.TinySound;
 import processing.core.PApplet;
 
 public class Defender extends Ship {
@@ -12,6 +13,9 @@ public class Defender extends Ship {
 	public Defender (int x, int y, int speed,
 	 String image, PApplet p) {
 		super(x, y, speed, image, p);
+		
+		shoot = TinySound.loadSound("playerShoot.wav");
+		hit = TinySound.loadSound("playerHit.wav");
 	} // end constructor
 
 	public int getXDirection() {
@@ -28,6 +32,7 @@ public class Defender extends Ship {
 
 	public Bullet shoot() {
 		shotTime = parent.millis();
+		shoot.play(0.3);
 		return new Bullet(x + width/2, y, 5, parent);
 	}
 
@@ -49,6 +54,7 @@ public class Defender extends Ship {
 	public void getHit() {
         --lives;
         xDirection = 0;
+        hit.play(0.3);
     }
 
 }// end class
