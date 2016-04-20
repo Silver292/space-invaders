@@ -137,14 +137,18 @@ public class EnemyGroup {
     	return amount;
     }
     
-    // Checks for game over state
-    private void checkGameOver() {
+    // Checks for enemies left and updates gameOverState
+    private void checkEnemiesLeft() {
+    	// return if game has already ended used in case of collision with player
+    	if (gameOverState){
+    		return;
+    	}
     	gameOverState = amount > 0 ? false : true;
     }
     
     // Returns game over state
     public boolean hasGameOverState() {
-    	checkGameOver();
+    	checkEnemiesLeft();
     	return gameOverState;
     }
 }

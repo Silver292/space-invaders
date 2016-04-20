@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 //TODO: Add sound
 //TODO: Better title and text
-//TODO: Enemy collision with player does not end game
 
 public class SpaceInvaders extends PApplet {
 
