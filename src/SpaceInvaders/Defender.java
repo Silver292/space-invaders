@@ -45,9 +45,10 @@ public class Defender extends Ship {
         return lives;
     }
 
-    // reduces player lives
+    // reduces player lives and stops movement
 	public void getHit() {
         --lives;
+        xDirection = 0;
     }
 
 }// end class
