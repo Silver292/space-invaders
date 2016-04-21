@@ -1,0 +1,6 @@
+- Defender stops when shot
+- Game will end when enemy and defender collide
+- Fixed bug where game would not restart after player died
+- Added sound
+- Added explosion animation when enemy is shot
+- Changed fonts on UI, intro and game over screens
