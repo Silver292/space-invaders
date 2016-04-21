@@ -15,6 +15,13 @@ public class GameObject  {
 		parent = p;
 	}
 
+	public GameObject (int x, int y, PApplet p) {
+		this.x = x;
+		this.y = y;
+		parent = p;
+	}
+	
+	
 	public void update() {
 		// check object is still in play
 		if(destroyed){
@@ -37,6 +44,14 @@ public class GameObject  {
 	
 	public boolean isDestroyed() {
 		return destroyed;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 	
 	public void move(){};

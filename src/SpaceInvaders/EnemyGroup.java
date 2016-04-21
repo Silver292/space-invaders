@@ -104,7 +104,7 @@ public class EnemyGroup {
     // Takes a player and a bullet and checks if the bullet
     // has hit any enemies. If there is a collision points are
     // added to player and returns true
-    public boolean playerBulletHit(Defender player, Bullet bullet) {
+    public boolean playerBulletHit(Defender player, Bullet bullet, AnimGroup explosions) {
     	
         // iterate over enemies to check collision
         for (int row = 0; row < enemyArray.length; ++row) {
@@ -121,7 +121,7 @@ public class EnemyGroup {
                     player.addPoints(enemyArray[row][column].getPoints());
                     
                     // remove collided objects
-                    enemyArray[row][column].beenHit();
+                    enemyArray[row][column].beenHit(explosions);
                     enemyArray[row][column] = null;
                     amount--;
                     return true;

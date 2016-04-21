@@ -19,6 +19,7 @@ public class SpaceInvaders extends PApplet {
     // Game variables
     private Defender player;
     private ArrayList<Bullet> bullets;
+    private AnimGroup explosions;
     private ShieldGroup shields;
     private Button startButton, endButton;
     private EnemyGroup enemies;
@@ -87,6 +88,9 @@ public class SpaceInvaders extends PApplet {
     public void gameInit() {
         // create bullet list
         bullets = new ArrayList<Bullet>();
+        
+        // create animation list
+        explosions = new AnimGroup(this);
     	
         // create shields
     	shields = new ShieldGroup(4, this);
@@ -113,6 +117,8 @@ public class SpaceInvaders extends PApplet {
         updateBullets();
         
         enemies.updateEnemies(player, bullets);
+        
+        explosions.update();
         
         shields.update();
 
@@ -259,7 +265,7 @@ public class SpaceInvaders extends PApplet {
             if(bullet.getBulletType() == BulletType.PLAYER) {
 
             	// remove bullet if it has hit an enemy
-            	if (enemies.playerBulletHit(player, bullet)){
+            	if (enemies.playerBulletHit(player, bullet, explosions)){
             		iterator.remove();
             	}
                 

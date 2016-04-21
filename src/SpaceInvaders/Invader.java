@@ -1,5 +1,6 @@
 package SpaceInvaders;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import processing.core.PApplet;
@@ -102,8 +103,9 @@ public class Invader extends Ship {
     }
     
     // used when enemy is hit by a bullet
-    public void beenHit() {
+    public void beenHit(AnimGroup explosions) {
     	destroy();
+    	explosions.addExplosion(x,y);
     	hit.play(0.3);
     }
 
