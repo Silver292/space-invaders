@@ -3,7 +3,7 @@
 	<classpathentry excluding="SpaceInvaders/assets/" kind="src" path="src"/>
 	<classpathentry kind="src" path="assets"/>
 	<classpathentry kind="lib" path="src/SpaceInvaders/core.jar"/>
-	<classpathentry kind="lib" path="tinysound-1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/tinysound-1.1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
