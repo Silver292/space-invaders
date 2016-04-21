@@ -1,6 +1,7 @@
 package SpaceInvaders;
 
 import java.util.Random;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -103,9 +104,8 @@ public class Invader extends Ship {
     // used when enemy is hit by a bullet
     public void beenHit() {
     	destroy();
-    	hit.play(0.3);  //TODO: find out why this sound does not play
-    	unloadSounds();
+    	hit.play(0.3);
+    	unloadSounds(); // This stops the sound from playing TODO:FIX
     }
-
 
 }

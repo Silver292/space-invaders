@@ -9,6 +9,7 @@ import kuusisto.tinysound.*;
 
 
 // TODO: Is there a memory leak?
+//TODO: explosion?
 
 public class SpaceInvaders extends PApplet {
 
