@@ -8,9 +8,6 @@ import java.util.Iterator;
 import kuusisto.tinysound.*;
 
 
-// TODO: Is there a memory leak?
-//TODO: explosion?
-
 public class SpaceInvaders extends PApplet {
 
     // Run this project as Java application and this

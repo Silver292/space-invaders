@@ -105,7 +105,6 @@ public class Invader extends Ship {
     public void beenHit() {
     	destroy();
     	hit.play(0.3);
-    	unloadSounds(); // This stops the sound from playing TODO:FIX
     }
 
 }
