@@ -29,6 +29,7 @@ public class SpaceInvaders extends PApplet {
     private int highscore;
     private int level = 1;
     private Music bgMusic;
+    private PFont smallFont, largeFont, buttonFont;
 
     private PImage background;
 
@@ -39,11 +40,17 @@ public class SpaceInvaders extends PApplet {
     public void setup() {
 
         gameState = GameState.TITLE_SCREEN;
+        
+        // Load fonts
+        largeFont = createFont("ca.ttf", 32);
+        smallFont = createFont("ca.ttf", 18);
+        buttonFont = createFont("ca.ttf", 16);
+        
         // create buttons
         startButton = new Button("START", width/2, height - 160,
-            150, 80, color(0,153,51), 7, this);
+            150, 80, color(0,153,51), buttonFont, 7, this);
         endButton = new Button("Title screen", width/2, height - 160,
-            150, 80, color(0,153,51), 7, this);
+            150, 80, color(0,153,51), buttonFont, 7, this);
 
         // Load background
         background = loadImage("Ship.png");
@@ -162,11 +169,7 @@ public class SpaceInvaders extends PApplet {
     public void drawScreen(String title, Button button) {
         background(0);
         textAlign(CENTER);
-        
-        // load the font
-    	PFont ca;
-        ca = createFont("ca.ttf", 32);
-        textFont(ca);
+        textFont(largeFont);
         
         fill(255);
         text(title, width/2, 100);
@@ -187,10 +190,9 @@ public class SpaceInvaders extends PApplet {
         highscore = score > highscore ? score : highscore;
         
         textAlign(CENTER);
-    	PFont ca;
-        ca = createFont("ca.ttf", 32);
-        textFont(ca);
+        textFont(largeFont);
         fill(255);
+        
         text("HIGHSCORE", width/2, height/4);
 
         text(highscore, width/2, height/4 + 50);
@@ -211,9 +213,7 @@ public class SpaceInvaders extends PApplet {
 
         // Show score
         textAlign(CENTER);
-    	PFont ca;
-        ca = createFont("ca.ttf", 18);
-        textFont(ca);
+        textFont(smallFont);
         fill(255);
         text("SCORE: " + player.getScore(), width/4 * 3, 30);
 

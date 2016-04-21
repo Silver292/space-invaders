@@ -5,33 +5,35 @@ import processing.core.PFont;
 
 public class Button {
 
-	String buttonText;
-	int x;
-	int y;
-	int buttonWidth;
-	int buttonHeight;
-	int buttonColour;
-	int rounding = 0;
-	float leftEdge, rightEdge, topEdge, bottomEdge;
+	private String buttonText;
+	private int x;
+	private int y;
+	private int buttonWidth;
+	private int buttonHeight;
+	private int buttonColour;
+	private int rounding = 0;
+	private float leftEdge, rightEdge, topEdge, bottomEdge;
+	private PFont font;
 	
 	PApplet parent;
 
 	public Button (String text, int x, int y, int bWidth, int bHeight, 
-			int colour, PApplet p) {
+			int colour, PFont font, PApplet p) {
 		buttonText   = text;
 		this.x       = x;
 		this.y       = y;
 		buttonWidth  = bWidth;
 		buttonHeight = bHeight;
 		buttonColour = colour;
-
+		this.font = font;
+		
 		parent = p;
 		
 		setEdges();
 	}
 
 	public Button (String text, int x, int y, int bWidth, int bHeight, 
-			int colour, int rounding, PApplet p) {
+			int colour, PFont font, int rounding, PApplet p) {
 		buttonText 	  = text;
 		this.x        = x;
 		this.y        = y;
@@ -39,6 +41,7 @@ public class Button {
 		buttonHeight  = bHeight;
 		buttonColour  = colour;
 		this.rounding = rounding;
+		this.font = font;
 
 		parent = p;
 		
@@ -64,9 +67,7 @@ public class Button {
 
 		// Button text
 		parent.textAlign(PConstants.CENTER, PConstants.CENTER);
-    	PFont ca;
-        ca = parent.createFont("ca.ttf", 16);
-        parent.textFont(ca);
+        parent.textFont(font);
 		parent.fill(0);
 		parent.text(buttonText, x, y);
 
