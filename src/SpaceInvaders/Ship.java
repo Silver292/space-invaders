@@ -11,7 +11,7 @@ public class Ship extends GameObject {
 
     public Ship (int x, int y, int speed, String image, PApplet p) {
         super(x, y, speed, p);
-        shoot = TinySound.loadSound("enemyShoot.wav");
+        shoot = TinySound.loadSound("enemyShoot.ogg");
         hit = TinySound.loadSound("enemyHit.wav");
         
         sprite = parent.loadImage(image);
