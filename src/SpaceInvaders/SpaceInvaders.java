@@ -56,7 +56,7 @@ public class SpaceInvaders extends PApplet {
         // Load background music
         TinySound.init();
         TinySound.setGlobalVolume(0.7);
-        bgMusic = TinySound.loadMusic("bgMusic.wav");
+        bgMusic = TinySound.loadMusic("bgMusic.ogg");
         bgMusic.setVolume(0.5);
         bgMusic.play(true);
     }
