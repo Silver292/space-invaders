@@ -2,6 +2,7 @@ package SpaceInvaders;
 
 import java.util.Random;
 
+import kuusisto.tinysound.Sound;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -12,11 +13,12 @@ public class Invader extends Ship {
     private int points = 10;
     private int bulletTime = 0;
     private int bulletTimeMax = 200;
+    private int speed = 8;
     private Random rand;
 
     public Invader (int x, int y, int points, String image1, 
-    		String image2, PApplet p) {
-        super(x, y, 8, image1, p);
+    		String image2, Sound shoot, Sound hit, PApplet p) {
+        super(x, y, 8, image1, shoot, hit, p);
 
         sprite1 = sprite;
         sprite2 = parent.loadImage(image2);
@@ -25,18 +27,6 @@ public class Invader extends Ship {
         rand = new Random();
         bulletTime = rand.nextInt(bulletTimeMax);
     } // end constructor
-
-	public Invader (int x, int y, int speed, int points, String image1,
-			String image2, PApplet p) {
-		super(x, y, speed, image1, p);
-
-        sprite1 = sprite;
-        sprite2 = parent.loadImage(image2);
-		xDirection = 1;
-        this.points = points;
-        rand = new Random();
-        bulletTime = rand.nextInt(bulletTimeMax);
-	} // end constructor
 
 	//updates invader and changes direction based on boolean passed
 	public void update(boolean changeDir) {

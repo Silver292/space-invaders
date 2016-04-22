@@ -15,7 +15,7 @@ public class Defender extends Ship {
 		super(x, y, speed, image, p);
 		
 		shoot = TinySound.loadSound("playerShoot.wav");
-		hit = TinySound.loadSound("playerHit.ogg");
+		hit = TinySound.loadSound("playerHit.wav");
 	} // end constructor
 
 	public int getXDirection() {

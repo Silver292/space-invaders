@@ -2,6 +2,8 @@ package SpaceInvaders;
 
 import java.util.ArrayList;
 
+import kuusisto.tinysound.Sound;
+import kuusisto.tinysound.TinySound;
 import processing.core.PApplet;
 
 public class EnemyGroup {
@@ -9,11 +11,15 @@ public class EnemyGroup {
 	private int amount;
 	private PApplet parent;
 	private boolean gameOverState = false;
+	Sound shoot, hit;
 	
 	public EnemyGroup(int rows, int enemiesPerRow, PApplet p) {
 		enemyArray = new Invader[rows][enemiesPerRow];
 		amount = rows * enemiesPerRow;
 		parent = p;
+		
+		shoot = TinySound.loadSound("enemyShoot.wav");
+        hit = TinySound.loadSound("enemyHit.wav");
 	}
 	
 	// Updates all enemies in group
@@ -93,7 +99,8 @@ public class EnemyGroup {
                 }
 
                 // create enemies to fill array
-                enemyArray[row][column] = new Invader(column * 35 + parent.width/4, rowHeight, points, imageOne, imageTwo, parent);
+                enemyArray[row][column] = new Invader(column * 35 + parent.width/4, rowHeight, points, imageOne, imageTwo,
+                		shoot, hit, parent);
             } // end inner for
 
             // change row height

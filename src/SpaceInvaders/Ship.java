@@ -9,11 +9,18 @@ public class Ship extends GameObject {
 	protected PImage sprite;
 	protected Sound shoot, hit;
 
-    public Ship (int x, int y, int speed, String image, PApplet p) {
+    public Ship (int x, int y, int speed, String image, Sound shoot, Sound hit, PApplet p) {
         super(x, y, speed, p);
-        shoot = TinySound.loadSound("enemyShoot.ogg");
-        hit = TinySound.loadSound("enemyHit.wav");
-        
+        this.shoot = shoot;
+        this.hit = hit;
+        sprite = parent.loadImage(image);
+
+        width = sprite.width;
+        height = sprite.height;
+    } // end constructor
+    
+    public Ship (int x, int y, int speed, String image, PApplet p) {
+        super(x, y, speed, p);        
         sprite = parent.loadImage(image);
 
         width = sprite.width;
